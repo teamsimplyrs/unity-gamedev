@@ -13,9 +13,21 @@ public class PlayerMovement : MonoBehaviour
     SpriteRenderer sprite;
     Animator anim;
 
+    private string current_dir;
+    private string currentState;
+    private bool isWalking;
+
+    private const string PLAYER_IDLE_DOWN = "player_idle_down";
+    private const string PLAYER_IDLE_SIDE = "player_idle_side";
+    private const string PLAYER_IDLE_UP = "player_idle_up";
+    private const string WALK_DOWN = "player_walk_down";
+    private const string WALK_UP = "player_walk_up";
+    private const string WALK_SIDE = "player_walk_side";
+
     // Start is called before the first frame update
     void Start()
     {
+        current_dir = "down";
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
@@ -26,40 +38,99 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
-        Debug.Log(rb.velocity);
-        if (rb.velocity.y < 0.0f)
-        {
-            anim.SetBool("walking_down", true);
-        }
-        else if (rb.velocity.y > 0.0f)
-        {
-            anim.SetBool("walking_down", false);
-            anim.SetBool("walking_up", true);
-        }
-        else if (rb.velocity.x > 0.0f)
-        {
-            anim.SetBool("walking_right", true);
-            sprite.flipX = false;
-        }
-        else if (rb.velocity.x < 0.0f)
-        {
-            anim.SetBool("walking_right", true);
-            sprite.flipX = true;
 
-        }
-        if (rb.velocity.x == 0.0f)
+        Debug.Log(rb.velocity);
+
+        if(horizontal == 0 && vertical == 0)
         {
-            anim.SetBool("walking_right", false);
+            isWalking = false;
+            if (current_dir == "down")
+            {
+                ChangeAnimationState(PLAYER_IDLE_DOWN);
+            }
+            else if (current_dir == "up")
+            {
+                ChangeAnimationState(PLAYER_IDLE_UP);
+            }
+            else if (current_dir == "right")
+            {
+                ChangeAnimationState(PLAYER_IDLE_SIDE);
+                sprite.flipX = false;
+            }
+            else if (current_dir == "left")
+            {
+                ChangeAnimationState(PLAYER_IDLE_SIDE);
+                sprite.flipX = true;
+            }
         }
-        if (rb.velocity.y == 0.0f)
+        else
         {
-            Debug.Log("reset reached");
-            anim.SetBool("walking_down", false);
-            anim.SetBool("walking_up", false);
+            isWalking = true;
+        }
+
+        if (isWalking)
+        {
+            if(rb.velocity.y < 0.0f)
+            {
+                ChangeAnimationState(WALK_DOWN);
+                current_dir = "down";
+            }
+            else if(rb.velocity.y > 0.0f)
+            {
+                ChangeAnimationState(WALK_UP);
+                current_dir = "up";
+            }
+            else if(rb.velocity.x > 0.0f)
+            {
+                ChangeAnimationState(WALK_SIDE);
+                sprite.flipX = false;
+                current_dir = "right";
+            }
+            else if(rb.velocity.x < 0.0f)
+            {
+                ChangeAnimationState(WALK_SIDE);
+                sprite.flipX = true;
+                current_dir = "left";
+            }
+            else
+            {
+                if(current_dir == "down")
+                {
+                    ChangeAnimationState(PLAYER_IDLE_DOWN);
+                }
+                else if(current_dir == "up")
+                {
+                    ChangeAnimationState(PLAYER_IDLE_UP);
+                }
+                else if(current_dir == "right")
+                {
+                    ChangeAnimationState(PLAYER_IDLE_SIDE);
+                    sprite.flipX = false;
+                }
+                else if(current_dir == "left")
+                {
+                    ChangeAnimationState(PLAYER_IDLE_SIDE);
+                    sprite.flipX = true;
+                }
+            }
         }
     }
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontal * Speed, vertical * Speed);
     }
+
+    void ChangeAnimationState(string newState)
+    {
+        if(currentState == newState) return;
+
+        anim.Play(newState);
+
+        currentState = newState;
+    }
+
+    
+
+
+
 }
