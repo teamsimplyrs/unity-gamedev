@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private string current_dir;
     private string currentState;
     private bool isWalking;
+    private bool isRunning;
 
     private const string PLAYER_IDLE_DOWN = "player_idle_down";
     private const string PLAYER_IDLE_SIDE = "player_idle_side";
@@ -38,8 +39,15 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            isRunning = true;
+        }
+        else
+        {
+            isRunning = false;
+        }
 
-        Debug.Log(rb.velocity);
 
         if(horizontal == 0 && vertical == 0)
         {
@@ -113,6 +121,17 @@ public class PlayerMovement : MonoBehaviour
                     sprite.flipX = true;
                 }
             }
+        }
+        if (isRunning)
+        {
+            Debug.Log("running");
+            anim.speed = 2;
+            Speed = 6;
+        }
+        else
+        {
+            anim.speed = 1;
+            Speed = 3;
         }
     }
     private void FixedUpdate()
