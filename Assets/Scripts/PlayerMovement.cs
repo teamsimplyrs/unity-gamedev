@@ -124,7 +124,6 @@ public class PlayerMovement : MonoBehaviour
         }
         if (isRunning)
         {
-            Debug.Log("running");
             anim.speed = 2;
             Speed = 6;
         }
