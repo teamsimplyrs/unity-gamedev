@@ -36,7 +36,7 @@ public class CameraController : MonoBehaviour
         {
             Vector3 destination = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);                                            
 
-            transform.position = Vector3.MoveTowards(transform.position, destination, 3.8f * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, destination, (PlayerMovement.Speed/3.0f) * 3.8f * Time.deltaTime);
         }
         //transform.position = new Vector3(player.transform.position.x + Input.GetAxis("Horizontal") * 1f,
         //    player.transform.position.y + Input.GetAxis("Vertical") * 1f , transform.position.z);
