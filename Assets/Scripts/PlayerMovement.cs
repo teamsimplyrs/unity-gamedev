@@ -39,17 +39,30 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
-        if(Input.GetKey(KeyCode.LeftShift))
+
+        Debug.Log(rb.velocity);
+        Debug.Log(current_dir);
+   
+        isRunning = Input.GetKey(KeyCode.LeftShift);
+
+        if (horizontal < 0)
         {
-            isRunning = true;
+            current_dir = "left";
         }
-        else
+        else if (vertical < 0)
         {
-            isRunning = false;
+            current_dir = "down";
+        }
+        else if (horizontal > 0)
+        {
+            current_dir = "right";
+        }
+        else if (vertical > 0)
+        {
+            current_dir = "up";
         }
 
-
-        if(horizontal == 0 && vertical == 0)
+        if (horizontal == 0 && vertical == 0)
         {
             isWalking = false;
             if (current_dir == "down")
@@ -78,27 +91,23 @@ public class PlayerMovement : MonoBehaviour
 
         if (isWalking)
         {
-            if(rb.velocity.y < 0.0f)
+            if(current_dir == "down")
             {
                 ChangeAnimationState(WALK_DOWN);
-                current_dir = "down";
             }
-            else if(rb.velocity.y > 0.0f)
+            else if (current_dir == "up")
             {
                 ChangeAnimationState(WALK_UP);
-                current_dir = "up";
             }
-            else if(rb.velocity.x > 0.0f)
+            else if (current_dir == "right")
             {
                 ChangeAnimationState(WALK_SIDE);
                 sprite.flipX = false;
-                current_dir = "right";
             }
-            else if(rb.velocity.x < 0.0f)
+            else if (current_dir == "left")
             {
                 ChangeAnimationState(WALK_SIDE);
                 sprite.flipX = true;
-                current_dir = "left";
             }
             else
             {
