@@ -1070,6 +1070,7 @@ GameObject:
   - component: {fileID: 755552511}
   - component: {fileID: 755552512}
   - component: {fileID: 755552513}
+  - component: {fileID: 755552514}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1263,7 +1264,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 1081597491}
-  health: {fileID: 0}
 --- !u!114 &755552513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1290,6 +1290,19 @@ MonoBehaviour:
   - {fileID: -1664322796, guid: 851759481034b9149a7fdacfcae99265, type: 3}
   - {fileID: -653986809, guid: 851759481034b9149a7fdacfcae99265, type: 3}
   - {fileID: -737140122, guid: 851759481034b9149a7fdacfcae99265, type: 3}
+--- !u!114 &755552514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755552505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 910e0af141d04c94ca2ce46044acda12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 755552513}
 --- !u!1 &833240940
 GameObject:
   m_ObjectHideFlags: 0

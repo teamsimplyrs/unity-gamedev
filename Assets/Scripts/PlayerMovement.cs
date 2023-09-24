@@ -59,75 +59,40 @@ public class PlayerMovement : MonoBehaviour
             current_dir = "up";
         }
 
-        if (horizontal == 0 && vertical == 0)
+        isWalking = !(horizontal == 00 && vertical == 0);
+
+        if (isWalking)
         {
-            isWalking = false;
-            if (current_dir == "down")
+            switch (current_dir)
             {
-                ChangeAnimationState(PLAYER_IDLE_DOWN);
-            }
-            else if (current_dir == "up")
-            {
-                ChangeAnimationState(PLAYER_IDLE_UP);
-            }
-            else if (current_dir == "right")
-            {
-                ChangeAnimationState(PLAYER_IDLE_SIDE);
-                sprite.flipX = false;
-            }
-            else if (current_dir == "left")
-            {
-                ChangeAnimationState(PLAYER_IDLE_SIDE);
-                sprite.flipX = true;
+                case "down":
+                    ChangeAnimationState(WALK_DOWN);
+                    break;
+
+                case "up":
+                    ChangeAnimationState(WALK_UP);
+                    break;
+
+                case "right":
+                    ChangeAnimationState(WALK_SIDE);
+                    sprite.flipX = false;
+                    break;
+
+                case "left":
+                    ChangeAnimationState(WALK_SIDE);
+                    sprite.flipX = true;
+                    break;
+
+                default:
+                    SetIdleAnimationState(current_dir);
+                    break;
             }
         }
         else
         {
-            isWalking = true;
+            SetIdleAnimationState(current_dir);
         }
 
-        if (isWalking)
-        {
-            if(current_dir == "down")
-            {
-                ChangeAnimationState(WALK_DOWN);
-            }
-            else if (current_dir == "up")
-            {
-                ChangeAnimationState(WALK_UP);
-            }
-            else if (current_dir == "right")
-            {
-                ChangeAnimationState(WALK_SIDE);
-                sprite.flipX = false;
-            }
-            else if (current_dir == "left")
-            {
-                ChangeAnimationState(WALK_SIDE);
-                sprite.flipX = true;
-            }
-            else
-            {
-                if(current_dir == "down")
-                {
-                    ChangeAnimationState(PLAYER_IDLE_DOWN);
-                }
-                else if(current_dir == "up")
-                {
-                    ChangeAnimationState(PLAYER_IDLE_UP);
-                }
-                else if(current_dir == "right")
-                {
-                    ChangeAnimationState(PLAYER_IDLE_SIDE);
-                    sprite.flipX = false;
-                }
-                else if(current_dir == "left")
-                {
-                    ChangeAnimationState(PLAYER_IDLE_SIDE);
-                    sprite.flipX = true;
-                }
-            }
-        }
         if (isRunning)
         {
             anim.speed = 2;
@@ -142,6 +107,32 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontal * Speed, vertical * Speed);
+    }
+
+    void SetIdleAnimationState(string direction)
+    {
+        Debug.Log("called");
+        switch (direction)
+        {
+            case "down":
+                ChangeAnimationState(PLAYER_IDLE_DOWN);
+                break;
+
+            case "up":
+                ChangeAnimationState(PLAYER_IDLE_UP);
+                break;
+
+            case "right":
+                ChangeAnimationState(PLAYER_IDLE_SIDE);
+                sprite.flipX = false;
+                break;
+
+            case "left":
+                ChangeAnimationState(PLAYER_IDLE_SIDE);
+                sprite.flipX = true;
+                break;
+
+        }
     }
 
     void ChangeAnimationState(string newState)
