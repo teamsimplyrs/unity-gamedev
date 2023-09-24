@@ -40,9 +40,6 @@ public class PlayerMovement : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
 
-        Debug.Log(rb.velocity);
-        Debug.Log(current_dir);
-   
         isRunning = Input.GetKey(KeyCode.LeftShift);
 
         if (horizontal < 0)
