@@ -69,6 +69,7 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
+
     public void takeDamage(int amount)
     {
         curHealth += amount;

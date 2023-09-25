@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerDebugUtils : MonoBehaviour
 {
 
-    [SerializeField] private HealthSystem health;
+    private HealthSystem health;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        health = GetComponent<HealthSystem>();
     }
 
     // Update is called once per frame

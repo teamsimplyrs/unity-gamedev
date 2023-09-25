@@ -111,7 +111,6 @@ public class PlayerMovement : MonoBehaviour
 
     void SetIdleAnimationState(string direction)
     {
-        Debug.Log("called");
         switch (direction)
         {
             case "down":
