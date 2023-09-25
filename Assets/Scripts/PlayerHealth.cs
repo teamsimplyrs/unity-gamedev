@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthSystem : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
 
     private int maxHeartAmount = 5;
@@ -14,12 +14,21 @@ public class HealthSystem : MonoBehaviour
 
     public Image[] healthImages;
     public Sprite[] healthSprites;
+
     // Start is called before the first frame update
     void Start()
     {
         curHealth = startHearts * healthPerHeart;
         maxHealth = maxHeartAmount * healthPerHeart;
         checkHealthAmount();
+    }
+
+    private void Update()
+    {
+        if (curHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void checkHealthAmount()
@@ -69,10 +78,10 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
+    public void TakeDamage(int amount)
 
-    public void takeDamage(int amount)
     {
-        curHealth += amount;
+        curHealth -= amount;
         curHealth = Mathf.Clamp(curHealth, 0, startHearts * healthPerHeart);
         updateHearts();
     }
@@ -83,5 +92,10 @@ public class HealthSystem : MonoBehaviour
         startHearts = Mathf.Clamp(startHearts, 0, maxHeartAmount);
 
         checkHealthAmount();
+    }
+
+    public bool IsAtFullHP()
+    {
+        return curHealth == startHearts * healthPerHeart;
     }
 }

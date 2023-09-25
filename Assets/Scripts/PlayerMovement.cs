@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     SpriteRenderer sprite;
     Animator anim;
 
-    private string current_dir;
+    public string current_dir;
     private string currentState;
     private bool isWalking;
     private bool isRunning;

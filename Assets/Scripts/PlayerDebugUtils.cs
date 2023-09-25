@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerDebugUtils : MonoBehaviour
 {
 
-    private HealthSystem health;
+    private PlayerHealth health;
 
     // Start is called before the first frame update
     void Start()
     {
-        health = GetComponent<HealthSystem>();
+        health = GetComponent<PlayerHealth>();
     }
 
     // Update is called once per frame
@@ -19,11 +19,11 @@ public class PlayerDebugUtils : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.KeypadPlus))
         {
-            health.takeDamage(1);
+            health.TakeDamage(1);
         }
         else if (Input.GetKeyDown(KeyCode.KeypadMinus))
         {
-            health.takeDamage(-1);
+            health.TakeDamage(-1);
         }
     }
 }
