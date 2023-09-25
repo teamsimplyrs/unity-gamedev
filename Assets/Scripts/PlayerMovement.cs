@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     SpriteRenderer sprite;
     Animator anim;
 
-    private string current_dir;
+    public string current_dir;
     private string currentState;
     private bool isWalking;
     private bool isRunning;
@@ -111,7 +111,6 @@ public class PlayerMovement : MonoBehaviour
 
     void SetIdleAnimationState(string direction)
     {
-        Debug.Log("called");
         switch (direction)
         {
             case "down":
