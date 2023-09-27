@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private string currentState;
     private bool isWalking;
     private bool isRunning;
+    public bool playerInteracting;
 
     private const string PLAYER_IDLE_DOWN = "player_idle_down";
     private const string PLAYER_IDLE_SIDE = "player_idle_side";
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         current_dir = "down";
+        playerInteracting = false;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
@@ -106,7 +108,10 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * Speed, vertical * Speed);
+        if (!playerInteracting)
+        {
+            rb.velocity = new Vector2(horizontal * Speed, vertical * Speed);
+        }
     }
 
     void SetIdleAnimationState(string direction)
