@@ -66,4 +66,13 @@ public class PlayerAttack : MonoBehaviour
             sword.GetComponent<Animator>().SetTrigger("attacking");
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        IDamageHandler damageHander = collision.GetComponent<IDamageHandler>();
+        if(damageHander != null)
+        {
+            damageHander.hit();
+        }
+    }
 }

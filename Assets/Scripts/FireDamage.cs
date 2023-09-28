@@ -21,7 +21,6 @@ public class FireDamage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Fire collision tick");
         if (collision.gameObject.tag == "Player")
         {
             PlayerHealth player_hp = collision.gameObject.GetComponent<PlayerHealth>();
