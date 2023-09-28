@@ -5092,7 +5092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f19dad88dc7f10041910e8efdf95c31b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryPage: {fileID: 1597060481070487183, guid: a093eac2582b7b5458ec3cfbc5b95512, type: 3}
+  inventoryPage: {fileID: 0}
   inventorySize: 6
 --- !u!1 &4568183461961313724
 GameObject:
