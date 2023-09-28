@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SwordAnimation : MonoBehaviour
 {
-    private Animator anim;
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,5 +20,6 @@ public class SwordAnimation : MonoBehaviour
     void clearAnimation()
     {
         anim.ResetTrigger("attacking");
+        gameObject.SetActive(false);
     }
 }
