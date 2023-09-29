@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer sprite;
     Animator anim;
+    AudioSource footstep;
 
     public string current_dir;
     private string currentState;
@@ -34,6 +35,9 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        footstep = GetComponent<AudioSource>();
+        Debug.Log(footstep);
+        footstep.enabled = false;
     }
 
     // Update is called once per frame
@@ -65,6 +69,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (isWalking)
         {
+            if(!footstep.enabled)
+            {
+                footstep.enabled = true;
+            }
             switch (current_dir)
             {
                 case "down":
@@ -93,17 +101,20 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             SetIdleAnimationState(current_dir);
+            footstep.enabled = false;
         }
 
         if (isRunning)
         {
             anim.speed = 2;
             Speed = 6;
+            footstep.pitch = 2;
         }
         else
         {
             anim.speed = 1;
             Speed = 3;
+            footstep.pitch = 1;
         }
     }
     private void FixedUpdate()
