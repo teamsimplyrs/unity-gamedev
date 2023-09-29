@@ -11,7 +11,6 @@ public class SwordAnimation : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         trailRenderer = transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>();
-        Debug.Log(transform.GetChild(0).GetChild(0).name);
         trailRenderer.enabled = false;
     }
 

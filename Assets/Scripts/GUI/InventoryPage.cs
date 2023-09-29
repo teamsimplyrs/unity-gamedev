@@ -16,7 +16,6 @@ public class InventoryPage : MonoBehaviour
             InventoryItemSlot slot = Instantiate(itemSlotPrefab, Vector3.zero, Quaternion.identity);
             slot.transform.SetParent(contentPanel);
             slot.transform.localScale = Vector3.one;
-            Debug.Log(contentPanel.transform.localScale);
             listItemSlots.Add(slot);
         }
     }
