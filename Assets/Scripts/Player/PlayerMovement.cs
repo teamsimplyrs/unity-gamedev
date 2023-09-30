@@ -13,8 +13,9 @@ public class PlayerMovement : MonoBehaviour
     SpriteRenderer sprite;
     Animator anim;
     AudioSource footstep;
+    GameObject particleComponent;
 
-    public string current_dir;
+    public string currentDir;
     private string currentState;
     private bool isWalking;
     private bool isRunning;
@@ -30,79 +31,21 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        current_dir = "down";
+        currentDir = "down";
         playerInteracting = false;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         footstep = GetComponent<AudioSource>();
-        Debug.Log(footstep);
         footstep.enabled = false;
+        particleComponent = transform.GetChild(1).gameObject;
+        particleComponent.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
-
-        isRunning = Input.GetKey(KeyCode.LeftShift);
-
-        if (horizontal < 0)
-        {
-            current_dir = "left";
-        }
-        else if (vertical < 0)
-        {
-            current_dir = "down";
-        }
-        else if (horizontal > 0)
-        {
-            current_dir = "right";
-        }
-        else if (vertical > 0)
-        {
-            current_dir = "up";
-        }
-
-        isWalking = !(horizontal == 00 && vertical == 0);
-
-        if (isWalking)
-        {
-            if(!footstep.enabled)
-            {
-                footstep.enabled = true;
-            }
-            switch (current_dir)
-            {
-                case "down":
-                    ChangeAnimationState(WALK_DOWN);
-                    break;
-
-                case "up":
-                    ChangeAnimationState(WALK_UP);
-                    break;
-
-                case "right":
-                    ChangeAnimationState(WALK_SIDE);
-                    sprite.flipX = false;
-                    break;
-
-                case "left":
-                    ChangeAnimationState(WALK_SIDE);
-                    sprite.flipX = true;
-                    break;
-
-                default:
-                    SetIdleAnimationState(current_dir);
-                    break;
-            }
-        }
-        else
-        {
-            SetIdleAnimationState(current_dir);
-            footstep.enabled = false;
-        }
+        PlayerAnimationLogic();
 
         if (isRunning)
         {
@@ -116,6 +59,8 @@ public class PlayerMovement : MonoBehaviour
             Speed = 3;
             footstep.pitch = 1;
         }
+
+        PlayerParticleControl();
     }
     private void FixedUpdate()
     {
@@ -157,6 +102,82 @@ public class PlayerMovement : MonoBehaviour
         anim.Play(newState);
 
         currentState = newState;
+    }
+
+    void PlayerAnimationLogic()
+    {
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
+
+        isRunning = Input.GetKey(KeyCode.LeftShift);
+
+        if (horizontal < 0)
+        {
+            currentDir = "left";
+        }
+        else if (vertical < 0)
+        {
+            currentDir = "down";
+        }
+        else if (horizontal > 0)
+        {
+            currentDir = "right";
+        }
+        else if (vertical > 0)
+        {
+            currentDir = "up";
+        }
+
+        isWalking = !(horizontal == 00 && vertical == 0);
+
+        if (isWalking)
+        {
+            if (!footstep.enabled)
+            {
+                footstep.enabled = true;
+            }
+            switch (currentDir)
+            {
+                case "down":
+                    ChangeAnimationState(WALK_DOWN);
+                    break;
+
+                case "up":
+                    ChangeAnimationState(WALK_UP);
+                    break;
+
+                case "right":
+                    ChangeAnimationState(WALK_SIDE);
+                    sprite.flipX = false;
+                    break;
+
+                case "left":
+                    ChangeAnimationState(WALK_SIDE);
+                    sprite.flipX = true;
+                    break;
+
+                default:
+                    SetIdleAnimationState(currentDir);
+                    break;
+            }
+        }
+        else
+        {
+            SetIdleAnimationState(currentDir);
+            footstep.enabled = false;
+        }
+    }
+
+    void PlayerParticleControl()
+    {
+        if(rb.velocity == Vector2.zero)
+        {
+            particleComponent.SetActive(false);
+        }
+        else
+        {
+            particleComponent.SetActive(true);
+        }
     }
 
     

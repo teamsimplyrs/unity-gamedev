@@ -26,7 +26,7 @@ public class FireDamage : MonoBehaviour
             PlayerHealth player_hp = collision.gameObject.GetComponent<PlayerHealth>();
             PlayerMovement movement = collision.gameObject.GetComponent<PlayerMovement>();
             SpriteRenderer sprite = collision.gameObject.GetComponent<SpriteRenderer>();
-            string player_dir = collision.gameObject.GetComponent<PlayerMovement>().current_dir;
+            string player_dir = collision.gameObject.GetComponent<PlayerMovement>().currentDir;
             Rigidbody2D player_rb = collision.gameObject.GetComponent<Rigidbody2D>();
             player_hp.TakeDamage(1);
             movement.playerInteracting = true;

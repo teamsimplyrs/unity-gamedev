@@ -18,7 +18,7 @@ public class PlayerAttack : MonoBehaviour
         sword = transform.Find("Hand").gameObject;
         sword.SetActive(false);
         movement = GetComponent<PlayerMovement>();
-        local_current_dir = movement.current_dir;
+        local_current_dir = movement.currentDir;
         swordAnimator = sword.GetComponent<Animator>();
     }
 
@@ -30,10 +30,10 @@ public class PlayerAttack : MonoBehaviour
         {
             sword.SetActive(true);
             attacking = swordAnimator.GetBool("attacking");
-            if (local_current_dir != movement.current_dir && !attacking)
+            if (local_current_dir != movement.currentDir && !attacking)
             {
-                local_current_dir = movement.current_dir;
-                switch (movement.current_dir)
+                local_current_dir = movement.currentDir;
+                switch (movement.currentDir)
                 {
                     case "down":
                         sword.transform.rotation = Quaternion.Euler(0, 0, 0f);
@@ -57,7 +57,7 @@ public class PlayerAttack : MonoBehaviour
                 }
 
                 GameObject sword_sprite = sword.transform.GetChild(0).GetChild(0).gameObject;
-                if (movement.current_dir == "up")
+                if (movement.currentDir == "up")
                 {
                     sword_sprite.transform.localPosition = new Vector3(0, -1.2f, 0);
                 }
