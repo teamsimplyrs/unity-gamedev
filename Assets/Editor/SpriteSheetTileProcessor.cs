@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -27,54 +28,52 @@ public class SpriteSheetToPaletteProcessor : EditorWindow
         {
             if (spriteSheet && tilePalettePrefab)
             {
-                SliceSpriteSheet();
+                //SliceSpriteSheet();
                 CreateTilesAndAddToPalette();
             }
         }
     }
 
-    private void SliceSpriteSheet()
-    {
-        // Assuming square tiles for simplicity
-        int tilesX = spriteSheet.width / tileSize;
-        int tilesY = spriteSheet.height / tileSize;
+    //private void SliceSpriteSheet()
+    //{
+    //    int tilesX = spriteSheet.width / tileSize;
+    //    int tilesY = spriteSheet.height / tileSize; 
 
-        string spriteAssetPath = AssetDatabase.GetAssetPath(spriteSheet);
-        string directory = System.IO.Path.GetDirectoryName(spriteAssetPath);
-        string outputPath = directory + "/Sliced/";
+    //    string spriteAssetPath = AssetDatabase.GetAssetPath(spriteSheet);
+    //    string directory = System.IO.Path.GetDirectoryName(spriteAssetPath);
+    //    string outputPath = directory + "/Sliced/";
 
-        // Check if directory exists, if not, create it
-        if (!System.IO.Directory.Exists(outputPath))
-        {
-            System.IO.Directory.CreateDirectory(outputPath);
-        }
+    //    if (!System.IO.Directory.Exists(outputPath))
+    //    {
+    //        System.IO.Directory.CreateDirectory(outputPath);
+    //    }
 
-        TextureImporter ti = AssetImporter.GetAtPath(spriteAssetPath) as TextureImporter;
-        ti.isReadable = true;
-        ti.spriteImportMode = SpriteImportMode.Multiple;
+    //    TextureImporter ti = AssetImporter.GetAtPath(spriteAssetPath) as TextureImporter;
+    //    ti.isReadable = true;
+    //    ti.spriteImportMode = SpriteImportMode.Multiple;
 
-        System.Collections.Generic.List<SpriteMetaData> newData = new System.Collections.Generic.List<SpriteMetaData>();
+    //    List<SpriteMetaData> newData = new List<SpriteMetaData>();
 
-        for (int y = 0; y < tilesY; y++)
-        {
-            for (int x = 0; x < tilesX; x++)
-            {
-                SpriteMetaData smd = new SpriteMetaData
-                {
-                    alignment = 0,
-                    border = new Vector4(),
-                    name = spriteSheet.name + "_tile_" + x + "_" + y,
-                    pivot = new Vector2(0.5f, 0.5f),
-                    rect = new Rect(x * tileSize, spriteSheet.height - (y + 1) * tileSize, tileSize, tileSize)
-                };
+    //    for (int y = 0; y < tilesY; y++)
+    //    {
+    //        for (int x = 0; x < tilesX; x++)
+    //        {
+    //            SpriteMetaData smd = new SpriteMetaData
+    //            {
+    //                alignment = 0,
+    //                border = new Vector4(),
+    //                name = spriteSheet.name + "_tile_" + x + "_" + y,
+    //                pivot = new Vector2(0.5f, 0.5f),
+    //                rect = new Rect(x * tileSize, spriteSheet.height - (y + 1) * tileSize, tileSize, tileSize)
+    //            };
 
-                newData.Add(smd);
-            }
-        }
+    //            newData.Add(smd);
+    //        }
+    //    }
 
-        ti.spritesheet = newData.ToArray();
-        AssetDatabase.ImportAsset(spriteAssetPath, ImportAssetOptions.ForceUpdate);
-    }
+    //    ti.spritesheet = newData.ToArray();
+    //    AssetDatabase.ImportAsset(spriteAssetPath, ImportAssetOptions.ForceUpdate);
+    //}
 
     private void CreateTilesAndAddToPalette()
     {
@@ -105,15 +104,15 @@ public class SpriteSheetToPaletteProcessor : EditorWindow
             {
                 Sprite sprite = (Sprite)o;
 
-                Tile tile = ScriptableObject.CreateInstance<Tile>();
+                TestTile tile = ScriptableObject.CreateInstance<TestTile>();
                 tile.sprite = sprite;
+                tile.colliderType = Tile.ColliderType.None;
+                tile.footstepColor = GetAverageColor(sprite);   
 
-                string assetPath = "Assets/Tiles/" + sprite.name + ".asset";  // Change path as needed
+                string assetPath = "Assets/Tiles/" + sprite.name + ".asset"; 
                 AssetDatabase.CreateAsset(tile, assetPath);
-
-                // Assuming you have a rectangular grid and tiles fit perfectly without overlaps
+                    
                 Vector3Int position = new Vector3Int((int)(sprite.rect.x / tileSize), (int)(sprite.rect.y / tileSize), 0);
-                Debug.Log(position);
                 targetTilemap.SetTile(position, tile);
             }
         }
@@ -141,7 +140,6 @@ public class SpriteSheetToPaletteProcessor : EditorWindow
             {
                 Sprite sprite = (Sprite)o;
 
-                // For this example, I'm assuming you're using the basic Tile. Replace with your custom tile type if needed.
                 Tile tile = ScriptableObject.CreateInstance<Tile>();
                 tile.sprite = sprite;
 
@@ -152,5 +150,25 @@ public class SpriteSheetToPaletteProcessor : EditorWindow
 
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
+    }
+
+    public static Color GetAverageColor(Sprite sprite)
+    {
+        Color[] pixels = sprite.texture.GetPixels(
+            (int)sprite.textureRect.x,
+            (int)sprite.textureRect.y,
+            (int)sprite.textureRect.width,
+            (int)sprite.textureRect.height
+        );
+
+        Color averageColor = Color.black;
+        for (int i = 0; i < pixels.Length; i++)
+        {
+            averageColor += pixels[i];
+        }
+
+        averageColor /= pixels.Length;
+
+        return averageColor;
     }
 }

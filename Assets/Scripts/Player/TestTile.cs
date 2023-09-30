@@ -1,3 +1,6 @@
+using Unity.VisualScripting;
+using UnityEditor;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -6,5 +9,5 @@ public class TestTile : Tile
 {
     public Color footstepColor;
    
-
 }
+

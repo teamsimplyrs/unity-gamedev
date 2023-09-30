@@ -21,8 +21,8 @@ public class PlayerDebugUtils : MonoBehaviour
         if(ruletile != null)
         {
             ParticleSystem particle = transform.GetChild(1).GetComponent<ParticleSystem>();
-            particle.startColor = ruletile.footstepColor;
-            Debug.Log(ruletile.footstepColor);
+            ParticleSystem.MainModule psmain = particle.main;
+            psmain.startColor = ruletile.footstepColor;
         }
     }
 }
