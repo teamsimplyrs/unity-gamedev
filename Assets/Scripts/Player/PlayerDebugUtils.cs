@@ -1,45 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlayerDebugUtils : MonoBehaviour
 {
 
-    private PlayerHealth health;
-    private PlayerMovement movement;
-    private Rigidbody2D rb;
+    private Tilemap tilemap;
 
     // Start is called before the first frame update
     void Start()
     {
-        health = GetComponent<PlayerHealth>();
-        rb = GetComponent<Rigidbody2D>();
-        movement = GetComponent<PlayerMovement>();
+        tilemap = GameObject.Find("Grid").transform.GetChild(3).gameObject.GetComponent<Tilemap>();
     }
 
     // Update is called once per frame
-    void Update()
+    void Update()   
     {
-
-        if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        TestTile ruletile = tilemap.GetTile<TestTile>(Vector3Int.FloorToInt(transform.position));
+        if(ruletile != null)
         {
-            health.TakeDamage(1);
+            ParticleSystem particle = transform.GetChild(1).GetComponent<ParticleSystem>();
+            particle.startColor = ruletile.footstepColor;
+            Debug.Log(ruletile.footstepColor);
         }
-        else if (Input.GetKeyDown(KeyCode.KeypadMinus))
-        {
-            health.TakeDamage(-1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Keypad0))
-        {
-            movement.playerInteracting = true;
-            rb.velocity = Vector2.right * 10;
-            Invoke("NotInteracting", 0.1f);
-        }
-    }
-
-    void NotInteracting()
-    {
-        movement.playerInteracting = false;
     }
 }

@@ -363,6 +363,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4981494885626925050, guid: a093eac2582b7b5458ec3cfbc5b95512, type: 3}
+      propertyPath: m_Size
+      value: 0.24333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4981494885626925050, guid: a093eac2582b7b5458ec3cfbc5b95512, type: 3}
+      propertyPath: m_Value
+      value: 1.0000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304281666182059332, guid: a093eac2582b7b5458ec3cfbc5b95512, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304281666182059332, guid: a093eac2582b7b5458ec3cfbc5b95512, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304281666182059332, guid: a093eac2582b7b5458ec3cfbc5b95512, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6264215349308805131, guid: a093eac2582b7b5458ec3cfbc5b95512, type: 3}
       propertyPath: m_SortingLayer
       value: 0
@@ -406,6 +426,10 @@ PrefabInstance:
     - target: {fileID: 8225765198893230459, guid: a093eac2582b7b5458ec3cfbc5b95512, type: 3}
       propertyPath: m_Name
       value: Inventory
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225765198893230459, guid: a093eac2582b7b5458ec3cfbc5b95512, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9217721149054828534, guid: a093eac2582b7b5458ec3cfbc5b95512, type: 3}
       propertyPath: m_AnchorMax.y
