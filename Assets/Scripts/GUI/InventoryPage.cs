@@ -8,6 +8,7 @@ public class InventoryPage : MonoBehaviour
     [SerializeField] private InventoryItemSlot itemSlotPrefab;
     [SerializeField] private RectTransform contentPanel;
     [SerializeField] private InventoryDescription itemDesc;
+    [SerializeField] private MouseFollower mouseFollower;
 
     List<InventoryItemSlot> listItemSlots = new List<InventoryItemSlot>();
 
@@ -19,6 +20,7 @@ public class InventoryPage : MonoBehaviour
     {
         Hide();
         itemDesc.ResetDesc();
+        mouseFollower.Toggle(false);
     }
 
     public void InitializeInventory(int invSize)
@@ -50,12 +52,13 @@ public class InventoryPage : MonoBehaviour
 
     private void HandleEndDrag(InventoryItemSlot obj)
     {
-        
+        mouseFollower.Toggle(false);
     }
 
     private void HandleBeginDrag(InventoryItemSlot obj)
     {
-        
+        mouseFollower.Toggle(true);
+        mouseFollower.SetData(sprite, qty);
     }
 
     private void HandleItemSelection(InventoryItemSlot obj)
