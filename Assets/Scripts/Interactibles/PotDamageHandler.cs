@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.U2D;
 using UnityEngine;
 
 public class PotDamageHandler : MonoBehaviour, IDamageHandler
@@ -36,7 +33,7 @@ public class PotDamageHandler : MonoBehaviour, IDamageHandler
         Destroy(gameObject);
     }
 
-    public void hit()
+    public void hit(GameObject hitter)
     {
         anim.SetTrigger("hit");
         sound.Play();

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IDamageHandler
 {
-    void hit();
+    void hit(GameObject hitter);
 }
