@@ -75,7 +75,7 @@ public class PlayerAttack : MonoBehaviour
         IDamageHandler damageHander = collision.GetComponent<IDamageHandler>();
         if(damageHander != null)
         {
-            damageHander.hit();
+            damageHander.hit(gameObject);
         }
     }
 }
