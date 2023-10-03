@@ -1201,6 +1201,7 @@ GameObject:
   - component: {fileID: 392271597578877641}
   - component: {fileID: 5161153022630817243}
   - component: {fileID: 1467328066907972680}
+  - component: {fileID: 5256794564956089338}
   m_Layer: 5
   m_Name: InventoryDescription
   m_TagString: Untagged
@@ -1267,6 +1268,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5256794564956089338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4015729707286844950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 458c69f9bbbb2fe4d8e8919075a37eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: {fileID: 9029983192781293132}
+  desc: {fileID: 7507705143279620672}
 --- !u!1 &4340128797865847791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1918,6 +1933,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSlotPrefab: {fileID: 2504281315859270828, guid: 6d4eb5c2f197a3a41be7d69a50c917c0, type: 3}
   contentPanel: {fileID: 9217721149054828534}
+  itemDesc: {fileID: 5256794564956089338}
+  sprite: {fileID: -267587109, guid: 6eb16e372762d6b4cb708c44ebfab931, type: 3}
+  qty: 1
+  title: Wooden Sword
+  desc: A basic blade made from the bark of a strong tree. Used by novice heroes
+    until they can wield higher weapons.
 --- !u!1 &8253393321417754169
 GameObject:
   m_ObjectHideFlags: 0
