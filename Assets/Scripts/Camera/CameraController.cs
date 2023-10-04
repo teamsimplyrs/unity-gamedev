@@ -10,6 +10,7 @@ public class CameraController : MonoBehaviour
     public PlayerMovement PlayerMovement;
     private Rigidbody2D PlayerRigidBody2d;
     public bool cameraMoving;
+    [SerializeField] VectorStorage playerPositionStorage;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,7 @@ public class CameraController : MonoBehaviour
         PlayerMovement = player.GetComponent<PlayerMovement>();
         PlayerRigidBody2d = player.GetComponent<Rigidbody2D>();
         cameraMoving = false;
+        transform.position = new Vector3(playerPositionStorage.value.x, playerPositionStorage.value.y, -10);
     }
 
     // Update is called once per frame

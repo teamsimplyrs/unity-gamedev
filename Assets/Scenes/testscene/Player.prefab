@@ -5005,7 +5005,7 @@ Animator:
   m_GameObject: {fileID: 2562925308439869427}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 222190587d21a13449c9cd8f0e70a233, type: 2}
+  m_Controller: {fileID: 9100000, guid: a604ebc9195963941ad149193203dad5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5029,7 +5029,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 3
-  playerPositionStorage: {fileID: 11400000, guid: 67dd06073d0d8db43bb9b7ddbcfa1b2e, type: 2}
   currentDir: 
   playerInteracting: 0
 --- !u!114 &2115240323913152230
@@ -5106,7 +5105,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 1175fb4f18a7f8d498672c06c4590cee, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 299fba3003f6c5f40a7d17d932a6bc80, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -5527,7 +5526,7 @@ Animator:
   m_GameObject: {fileID: 8379461308438925648}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e6c1e000ef36df84ba66fa9dc0f9e9e2, type: 2}
+  m_Controller: {fileID: 9100000, guid: d149ed365d20ff74d9d39a4edd7b9862, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

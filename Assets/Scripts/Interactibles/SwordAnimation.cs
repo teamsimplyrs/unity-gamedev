@@ -5,12 +5,16 @@ using UnityEngine;
 public class SwordAnimation : MonoBehaviour
 {
     public Animator anim;
+    GameObject sword;
     private TrailRenderer trailRenderer;
+    PolygonCollider2D swordCollider;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-        trailRenderer = transform.GetChild(0).GetChild(0).GetComponent<TrailRenderer>();
+        sword = transform.GetChild(0).GetChild(0).gameObject;
+        swordCollider = sword.GetComponent<PolygonCollider2D>();
+        trailRenderer = sword.GetComponent<TrailRenderer>();
         trailRenderer.enabled = false;
     }
 
@@ -29,10 +33,12 @@ public class SwordAnimation : MonoBehaviour
     void EnableTrail()
     {
         trailRenderer.enabled = true;
+        swordCollider.enabled = true;
     }
 
     void DisableTrail()
     {
         trailRenderer.enabled = false;
+        swordCollider.enabled = false;
     }
 }
