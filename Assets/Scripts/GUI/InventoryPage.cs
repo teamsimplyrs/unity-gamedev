@@ -12,9 +12,10 @@ public class InventoryPage : MonoBehaviour
 
     List<InventoryItemSlot> listItemSlots = new List<InventoryItemSlot>();
 
-    public Sprite sprite;
-    public int qty;
-    public string title, desc;
+    public event Action<int> OnDescriptionRequested, OnItemActionRequested, OnStartDragging;
+    public event Action<int, int> OnSwapItems;
+
+    private int currentlyDraggedItemIndex = -1;
 
     private void Awake()
     {
@@ -40,44 +41,91 @@ public class InventoryPage : MonoBehaviour
         }
     }
 
-    private void HandleShowItemActions(InventoryItemSlot obj)
+    public void UpdateData(int itemIndex, Sprite sprite, int qty)
+    {
+        if (listItemSlots.Count > itemIndex)
+        {
+            listItemSlots[itemIndex].SetData(sprite, qty);
+        }
+    }
+
+    private void HandleShowItemActions(InventoryItemSlot pSlot)
     {
         
     }
 
-    private void HandleSwap(InventoryItemSlot obj)
+    private void HandleSwap(InventoryItemSlot pSlot)
     {
-        
+        int index = listItemSlots.IndexOf(pSlot);
+        if (index == -1)
+        {
+            return;
+        }
+        OnSwapItems?.Invoke(currentlyDraggedItemIndex, index);
     }
 
-    private void HandleEndDrag(InventoryItemSlot obj)
+    private void ResetDraggedItem()
     {
         mouseFollower.Toggle(false);
+        currentlyDraggedItemIndex = -1;
+        return;
     }
 
-    private void HandleBeginDrag(InventoryItemSlot obj)
+    private void HandleEndDrag(InventoryItemSlot pSlot)
+    {
+        ResetDraggedItem();
+
+    }
+
+    private void HandleBeginDrag(InventoryItemSlot pSlot)
+    {
+        int index = listItemSlots.IndexOf(pSlot);
+        if (index == -1) return;
+        currentlyDraggedItemIndex = index;
+        HandleItemSelection(pSlot);
+        OnStartDragging?.Invoke(index);
+    }
+
+    public void CreateDraggedItem(Sprite sprite, int qty)
     {
         mouseFollower.Toggle(true);
         mouseFollower.SetData(sprite, qty);
     }
 
-    private void HandleItemSelection(InventoryItemSlot obj)
+    private void HandleItemSelection(InventoryItemSlot pSlot)
     {
-        itemDesc.SetDesc(title, desc);
-        listItemSlots[0].Select();
+        int index = listItemSlots.IndexOf(pSlot);
+        if (index == -1)
+        {
+            return;
+        }
+        OnDescriptionRequested?.Invoke(index);
     }
 
     public void Show()
     {
         gameObject.SetActive(true);
-        itemDesc.ResetDesc();
+        ResetSelection();
+    }
 
-        listItemSlots[0].SetData(sprite, qty);
+    private void ResetSelection()
+    {
+        itemDesc.ResetDesc();
+        DeselectAllItems();
+    }
+
+    private void DeselectAllItems()
+    {
+        foreach (InventoryItemSlot itemSlot in listItemSlots)
+        {
+            itemSlot.Deselect();
+        }
     }
 
     public void Hide()
     {
         gameObject.SetActive(false);
+        ResetDraggedItem();
     }
     
 }

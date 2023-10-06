@@ -1022,8 +1022,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3489829570128470816}
   m_HandleRect: {fileID: 7959816346429774309}
   m_Direction: 2
-  m_Value: 1.0000002
-  m_Size: 0.23999998
+  m_Value: 1.0000004
+  m_Size: 0.24
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1934,7 +1934,9 @@ MonoBehaviour:
   itemSlotPrefab: {fileID: 2504281315859270828, guid: 6d4eb5c2f197a3a41be7d69a50c917c0, type: 3}
   contentPanel: {fileID: 9217721149054828534}
   itemDesc: {fileID: 5256794564956089338}
+  mouseFollower: {fileID: 0}
   sprite: {fileID: -267587109, guid: 6eb16e372762d6b4cb708c44ebfab931, type: 3}
+  sprite2: {fileID: 0}
   qty: 1
   title: Wooden Sword
   desc: A basic blade made from the bark of a strong tree. Used by novice heroes

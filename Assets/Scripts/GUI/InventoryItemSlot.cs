@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryItemSlot : MonoBehaviour
+public class InventoryItemSlot : MonoBehaviour, IPointerClickHandler, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler
 {
     [SerializeField] private Image itemImg;
     [SerializeField] private TMP_Text quantityDisp;
@@ -23,7 +23,7 @@ public class InventoryItemSlot : MonoBehaviour
         Deselect();
     }
 
-    private void Deselect()
+    public void Deselect()
     {
         selectBorder.enabled = false;
     }
@@ -47,26 +47,8 @@ public class InventoryItemSlot : MonoBehaviour
         selectBorder.enabled = true;
     }
 
-    public void OnBeginDrag()
+    public void OnPointerClick(PointerEventData ptrData)
     {
-        if (empty) return;
-        OnItemBeginDrag?.Invoke(this);
-    }
-
-    public void OnDrop()
-    {
-        OnItemDroppedOn?.Invoke(this);
-    }
-
-    public void OnEndDrag()
-    {
-        OnItemEndDrag?.Invoke(this);
-    }
-
-    public void OnPointerClick(BaseEventData data)
-    {
-        PointerEventData ptrData = (PointerEventData)data;
-
         if (ptrData.button == PointerEventData.InputButton.Right)
         {
             OnItemAltClicked?.Invoke(this);
@@ -76,4 +58,29 @@ public class InventoryItemSlot : MonoBehaviour
             OnItemClicked?.Invoke(this);
         }
     }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        // This method exists as a result of there being a necessity to implement the IDragHandler interface
+        // when IBeginDragHandler and IEndDragHandler are implemented.
+        // This method is to be left empty as it is. (what a Drag fr fr)
+        // -shlok
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        if (empty) return;
+        OnItemBeginDrag?.Invoke(this);
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        OnItemEndDrag?.Invoke(this);
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        OnItemDroppedOn?.Invoke(this);
+    }
+
 }
