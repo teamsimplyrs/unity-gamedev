@@ -7,6 +7,7 @@ public class InventoryDescription : MonoBehaviour
 {
     [SerializeField] private TMP_Text title;
     [SerializeField] private TMP_Text desc;
+    [SerializeField] private RectTransform scrollview;
 
     public void Awake()
     {
@@ -15,12 +16,12 @@ public class InventoryDescription : MonoBehaviour
 
     public void ResetDesc()
     {
-        this.title.text = "";
-        this.desc.text = "";
+        scrollview.gameObject.SetActive(false);
     }
 
     public void SetDesc(string itemName, string itemDesc)
     {
+        scrollview.gameObject.SetActive(true);
         this.title.text = itemName;
         this.desc.text = itemDesc;
     }
