@@ -5,9 +5,12 @@ using UnityEngine;
 public class PickupSword : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField] ItemSO sword;
+    SpriteRenderer spriteRenderer;
     void Start()
     {
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = sword.ItemSprite;
     }
 
     // Update is called once per frame
@@ -22,7 +25,7 @@ public class PickupSword : MonoBehaviour
         {
             GameObject playerSword = collision.gameObject.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
             SpriteRenderer playerSwordSprite = playerSword.GetComponent<SpriteRenderer>();
-            playerSwordSprite.sprite = GetComponent<SpriteRenderer>().sprite;
+            playerSwordSprite.sprite = sword.ItemSprite;
             Destroy(gameObject);
         }
     }
