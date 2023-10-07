@@ -697,7 +697,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 15, y: 128.9}
+  m_AnchoredPosition: {x: 6.4, y: 128.9}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &731784041134106721
@@ -755,12 +755,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
+  m_fontSize: 22.2
   m_fontSizeBase: 20
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 10
+  m_fontSizeMax: 24
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -791,7 +791,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 30.254288, w: 19.376406}
+  m_margin: {x: 19.09021, y: 5.798851, z: 30.254288, w: 19.376406}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -938,8 +938,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
+  m_AnchoredPosition: {x: -5.0971, y: 0}
+  m_SizeDelta: {x: 6.8058, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &9135960833944879696
 CanvasRenderer:
@@ -1282,6 +1282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: {fileID: 9029983192781293132}
   desc: {fileID: 7507705143279620672}
+  scrollview: {fileID: 106984754486757999}
 --- !u!1 &4340128797865847791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1935,12 +1936,6 @@ MonoBehaviour:
   contentPanel: {fileID: 9217721149054828534}
   itemDesc: {fileID: 5256794564956089338}
   mouseFollower: {fileID: 0}
-  sprite: {fileID: -267587109, guid: 6eb16e372762d6b4cb708c44ebfab931, type: 3}
-  sprite2: {fileID: 0}
-  qty: 1
-  title: Wooden Sword
-  desc: A basic blade made from the bark of a strong tree. Used by novice heroes
-    until they can wield higher weapons.
 --- !u!1 &8253393321417754169
 GameObject:
   m_ObjectHideFlags: 0
