@@ -17,4 +17,4 @@ MonoBehaviour:
   <Name>k__BackingField: Blacknight's Armpiece
   <Description>k__BackingField: An offensive part ripped from the arm of a Blacknight.
     Boasts greater critical and status chance in darker areas.
-  <ItemSprite>k__BackingField: {fileID: 0}
+  <ItemSprite>k__BackingField: {fileID: 1145680292, guid: 6eb16e372762d6b4cb708c44ebfab931, type: 3}
