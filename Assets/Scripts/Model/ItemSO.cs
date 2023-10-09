@@ -24,5 +24,8 @@ namespace Inventory.Model
 
         [field: SerializeField]
         public Sprite ItemSprite { get; set; }
+
+        [field: SerializeField]
+        public AnimationClip ItemAnimation { get; set; }
     }
 }

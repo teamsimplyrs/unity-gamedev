@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour
 {
@@ -18,7 +19,10 @@ public class CameraController : MonoBehaviour
         PlayerMovement = player.GetComponent<PlayerMovement>();
         PlayerRigidBody2d = player.GetComponent<Rigidbody2D>();
         cameraMoving = false;
-        transform.position = new Vector3(playerPositionStorage.value.x, playerPositionStorage.value.y, -10);
+        if (playerPositionStorage.sceneName != SceneManager.GetActiveScene().name)
+        {
+            transform.position = new Vector3(playerPositionStorage.value.x, playerPositionStorage.value.y, -10);
+        }
     }
 
     // Update is called once per frame

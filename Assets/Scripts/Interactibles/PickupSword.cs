@@ -1,5 +1,7 @@
+using Inventory.Model;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PickupSword : MonoBehaviour
@@ -24,6 +26,11 @@ public class PickupSword : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             GameObject playerSword = collision.gameObject.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
+            GameObject playerHand = collision.gameObject.transform.GetChild(0).gameObject;
+            Animator swordAnimator = playerHand.GetComponent<Animator>();
+            AnimatorOverrideController overrideController = new AnimatorOverrideController(swordAnimator.runtimeAnimatorController);
+            swordAnimator.runtimeAnimatorController = overrideController;
+            overrideController["swing_attack"] = sword.ItemAnimation;
             SpriteRenderer playerSwordSprite = playerSword.GetComponent<SpriteRenderer>();
             playerSwordSprite.sprite = sword.ItemSprite;
             Destroy(gameObject);

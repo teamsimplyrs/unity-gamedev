@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -37,7 +38,11 @@ public class PlayerMovement : MonoBehaviour
         footstep.enabled = false;
         particleComponent = transform.GetChild(1).gameObject;
         particleComponent.SetActive(false);
-        transform.position = playerPositionStorage.value;
+        Debug.Log(SceneManager.GetActiveScene().name);
+        if (playerPositionStorage.sceneName != SceneManager.GetActiveScene().name)
+        {
+            transform.position = playerPositionStorage.value;
+        }
     }
 
     // Update is called once per frame

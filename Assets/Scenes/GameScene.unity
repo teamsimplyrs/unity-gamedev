@@ -4753,10 +4753,26 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3398454545234216305, guid: 5acd15ee706aecf45b0e28c4b57b09be, type: 3}
+      propertyPath: clip
+      value: 
+      objectReference: {fileID: 7400000, guid: b815cc6b6e3a0a64d88b7120ffd36d32, type: 2}
+    - target: {fileID: 3398454545234216305, guid: 5acd15ee706aecf45b0e28c4b57b09be, type: 3}
+      propertyPath: spinClip
+      value: 
+      objectReference: {fileID: 7400000, guid: b815cc6b6e3a0a64d88b7120ffd36d32, type: 2}
+    - target: {fileID: 3398454545234216305, guid: 5acd15ee706aecf45b0e28c4b57b09be, type: 3}
+      propertyPath: swingClip
+      value: 
+      objectReference: {fileID: 7400000, guid: c9e9114082f780e46abfb582edad78f5, type: 2}
     - target: {fileID: 3932717391746122976, guid: 5acd15ee706aecf45b0e28c4b57b09be, type: 3}
       propertyPath: inventory
       value: 
       objectReference: {fileID: 1081597491}
+    - target: {fileID: 8379461308438925648, guid: 5acd15ee706aecf45b0e28c4b57b09be, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8512371638894286597, guid: 5acd15ee706aecf45b0e28c4b57b09be, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -5002,7 +5018,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1367977445}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.512, y: 0.497, z: -10}
+  m_LocalPosition: {x: -0.5, y: 2.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18306,7 +18322,7 @@ Tilemap:
       - {fileID: 626259399, guid: 1b47a4e861cdc1a4cb34c415e5ba30c5, type: 3}
       - {fileID: 1342044326, guid: 1b47a4e861cdc1a4cb34c415e5ba30c5, type: 3}
       - {fileID: -1858397557, guid: 1b47a4e861cdc1a4cb34c415e5ba30c5, type: 3}
-      m_AnimationSpeed: 20.000002
+      m_AnimationSpeed: 20
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -5, y: 5, z: 0}
@@ -21905,6 +21921,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5027781653084614880, guid: 9b8b3eabe138fb74a864543733e824a8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1041754904, guid: 6eb16e372762d6b4cb708c44ebfab931, type: 3}
     - target: {fileID: 6137331721999652820, guid: 9b8b3eabe138fb74a864543733e824a8, type: 3}
       propertyPath: m_Name
       value: PickableSword
@@ -21912,7 +21932,7 @@ PrefabInstance:
     - target: {fileID: 6250324287962596672, guid: 9b8b3eabe138fb74a864543733e824a8, type: 3}
       propertyPath: sword
       value: 
-      objectReference: {fileID: 11400000, guid: 1bb3439938663c9469700b6692b10730, type: 2}
+      objectReference: {fileID: 11400000, guid: 439bc48e22e651c4eb8edd92d5cfc1b9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

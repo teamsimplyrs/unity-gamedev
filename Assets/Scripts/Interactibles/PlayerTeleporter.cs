@@ -15,6 +15,7 @@ public class PlayerTeleporter : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerPositionStorage.value = playerPosition;
+            playerPositionStorage.sceneName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(destinationScene);
         }
     }

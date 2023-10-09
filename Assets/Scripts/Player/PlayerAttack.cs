@@ -1,34 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.U2D;
+using UnityEditor;
+using UnityEditor.Animations;
+using System.Collections.Generic;
 
 public class PlayerAttack : MonoBehaviour
 {
 
-    GameObject sword;
+    GameObject playerHandObject;
     PlayerMovement movement;
     Animator swordAnimator;
+    AnimatorOverrideController overrideController;
     string local_current_dir;
     bool attacking;
+    public AnimationClip spinClip;
+    public AnimationClip swingClip;
 
     // Start is called before the first frame update
     void Start()
     {
-        sword = transform.Find("Hand").gameObject;
-        sword.SetActive(false);
+        playerHandObject = transform.Find("Hand").gameObject;
+        playerHandObject.SetActive(false);
         movement = GetComponent<PlayerMovement>();
         local_current_dir = movement.currentDir;
-        swordAnimator = sword.GetComponent<Animator>();
+        swordAnimator = playerHandObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            sword.SetActive(true);
+            playerHandObject.SetActive(true);
             attacking = swordAnimator.GetBool("attacking");
             if (local_current_dir != movement.currentDir && !attacking)
             {
@@ -36,27 +38,27 @@ public class PlayerAttack : MonoBehaviour
                 switch (movement.currentDir)
                 {
                     case "down":
-                        sword.transform.rotation = Quaternion.Euler(0, 0, 0f);
+                        playerHandObject.transform.rotation = Quaternion.Euler(0, 0, 0f);
                         break;
 
                     case "up":
-                        sword.transform.rotation = Quaternion.Euler(0, 0, 180f);
+                        playerHandObject.transform.rotation = Quaternion.Euler(0, 0, 180f);
                         break;
 
                     case "right":
-                        sword.transform.rotation = Quaternion.Euler(0, 0, 90f);
+                        playerHandObject.transform.rotation = Quaternion.Euler(0, 0, 90f);
                         break;
 
                     case "left":
-                        sword.transform.rotation = Quaternion.Euler(0, 0, 270f);
+                        playerHandObject.transform.rotation = Quaternion.Euler(0, 0, 270f);
                         break;
 
                     default:
-                        sword.transform.rotation = Quaternion.Euler(0, 0, 0f);
+                        playerHandObject.transform.rotation = Quaternion.Euler(0, 0, 0f);
                         break;
                 }
 
-                GameObject sword_sprite = sword.transform.GetChild(0).GetChild(0).gameObject;
+                GameObject sword_sprite = playerHandObject.transform.GetChild(0).GetChild(0).gameObject;
                 if (movement.currentDir == "up")
                 {
                     sword_sprite.transform.localPosition = new Vector3(0, -1.2f, 0);
@@ -66,7 +68,7 @@ public class PlayerAttack : MonoBehaviour
                     sword_sprite.transform.localPosition = new Vector3(0, -0.8f, 0);
                 }
             }
-            sword.GetComponent<Animator>().SetTrigger("attacking");
+            playerHandObject.GetComponent<Animator>().SetTrigger("attacking");
         }
     }
 

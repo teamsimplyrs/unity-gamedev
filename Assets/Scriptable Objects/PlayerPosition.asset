@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: PlayerPosition
   m_EditorClassIdentifier: 
   value: {x: -1.5, y: 0.5}
+  sceneName: IndoorScene
