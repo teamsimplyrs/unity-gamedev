@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2fd01a773319c94090d88e001e15282, type: 3}
-  m_Name: ThiefScimitarSO
+  m_Name: TalwarSO
   m_EditorClassIdentifier: 
   <IsStackable>k__BackingField: 0
   <MaxStackSize>k__BackingField: 1
-  <Name>k__BackingField: Thief's Scimitar
-  <Description>k__BackingField: Common Scimitar used by the Thieves. Deals double
-    damage when attacking from behind.
+  <Name>k__BackingField: Talwar
+  <Description>k__BackingField: A relic sabre from a bygone era, originally used
+    in battle by kings and royalty alike. Blesses the wielder with pride and confidence,
+    boosting ATK SPD.
   <ItemSprite>k__BackingField: {fileID: 503644337, guid: 6eb16e372762d6b4cb708c44ebfab931, type: 3}

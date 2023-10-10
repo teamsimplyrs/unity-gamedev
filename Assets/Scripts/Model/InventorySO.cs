@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -26,20 +27,78 @@ namespace Inventory.Model
             }
         }
 
-        public void AddItem(ItemSO pItem, int pQty)
+        public int AddItem(ItemSO pItem, int pQty)
         {
+            if (!pItem.IsStackable)
+            {
+                for (int i = 0; i < inventoryItems.Count; i++)
+                {
+                    while (pQty > 0 && !IsInventoryFull())
+                    {
+                        pQty -= AddItemToFirstFreeSlot(pItem, 1);
+                        pQty--;
+                    }
+                    InformAboutChange();
+                    return pQty;
+                }
+            }
+
+            pQty = AddStackableItem(pItem, pQty);
+            InformAboutChange();
+            return pQty;
+        }
+
+        private int AddItemToFirstFreeSlot(ItemSO pItem, int pQty)
+        {
+            InventoryItem nonStackableItem = new InventoryItem
+            {
+                item = pItem,
+                qty = pQty
+            };
+
             for (int i = 0; i < inventoryItems.Count; i++)
             {
                 if (inventoryItems[i].IsEmpty)
                 {
-                    inventoryItems[i] = new InventoryItem
-                    {
-                        item = pItem,
-                        qty = pQty,
-                    };
-                    return;
+                    inventoryItems[i] = nonStackableItem;
+                    return pQty;
                 }
             }
+            return 0;
+        }
+
+        private bool IsInventoryFull() => !(inventoryItems.Where(item => item.IsEmpty).Any());
+
+        public int AddStackableItem(ItemSO pItem, int pQty)
+        {
+            for (int i = 0; i < inventoryItems.Count; i++)
+            {
+                if (inventoryItems[i].IsEmpty) continue;
+                if (inventoryItems[i].item.ID == pItem.ID)
+                {
+                    int maxAmountPossible = inventoryItems[i].item.MaxStackSize - inventoryItems[i].qty;
+
+                    if (pQty > maxAmountPossible)
+                    {
+                        inventoryItems[i] = inventoryItems[i].ChangeQty(inventoryItems[i].item.MaxStackSize);
+                        pQty -= maxAmountPossible;
+                    }
+                    else
+                    {
+                        inventoryItems[i] = inventoryItems[i].ChangeQty(inventoryItems[i].qty + pQty);
+                        InformAboutChange();
+                        return 0;
+                    }
+                }
+            }
+
+            while (pQty > 0 && !IsInventoryFull())
+            {
+                int newQty = Mathf.Clamp(pQty, 0, pItem.MaxStackSize);
+                pQty -= newQty;
+                AddItemToFirstFreeSlot(pItem, newQty); 
+            }
+            return pQty;
         }
 
         public void AddItem(InventoryItem pItemObj)
@@ -66,10 +125,10 @@ namespace Inventory.Model
             InventoryItem tempSwapItem = inventoryItems[itemIndex1];
             inventoryItems[itemIndex1] = inventoryItems[itemIndex2];
             inventoryItems[itemIndex2] = tempSwapItem;
-            InformAboutSwap();
+            InformAboutChange();
         }
 
-        private void InformAboutSwap()
+        private void InformAboutChange()
         {
             OnInventoryChanged?.Invoke(GetCurrentInventoryState());
         }
