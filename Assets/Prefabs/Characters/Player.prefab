@@ -5083,6 +5083,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7626854dc6f0d74397c0775982e7432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spinClip: {fileID: 7400000, guid: b815cc6b6e3a0a64d88b7120ffd36d32, type: 2}
+  swingClip: {fileID: 7400000, guid: c9e9114082f780e46abfb582edad78f5, type: 2}
 --- !u!114 &1531228219331527324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5096,8 +5098,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryPage: {fileID: 0}
-  inventoryData: {fileID: 0}
-  initialItems: []
+  inventoryData: {fileID: 11400000, guid: 224af8e809804a74bb26f79cb1ec736c, type: 2}
+  initialItems:
+  - qty: 1
+    item: {fileID: 11400000, guid: 739a095fc1dd73047b301ff2471cbee1, type: 2}
+  - qty: 1
+    item: {fileID: 0}
+  - qty: 1
+    item: {fileID: 0}
+  - qty: 1
+    item: {fileID: 0}
+  - qty: 1
+    item: {fileID: 0}
+  - qty: 0
+    item: {fileID: 0}
 --- !u!82 &2117978655975468688
 AudioSource:
   m_ObjectHideFlags: 0
