@@ -1,20 +1,25 @@
+using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    public float speed = 3.0f; // Movement speed of the enemy
+    public float speed = 3.0f; 
     [SerializeField] bool chasing;
     private Transform playerTransform;
-    private Transform enemyTransform; // This is the main enemy (parent) transform
+    private Transform enemyTransform; 
     Rigidbody2D rb;
+    AIPath pathfinder;
 
     private void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        enemyTransform = transform.parent; // get the parent transform
+        enemyTransform = transform.parent;
         rb = enemyTransform.GetComponent<Rigidbody2D>();
+        pathfinder = enemyTransform.GetComponent<AIPath>();
+        pathfinder.canMove = false;
+        pathfinder.canSearch = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -22,7 +27,9 @@ public class EnemyAI : MonoBehaviour
         if (collider.CompareTag("Player"))
         {
             chasing = true;
-            StartCoroutine(ChasePlayer());
+            pathfinder.canMove = true;
+            pathfinder.canSearch = true;
+            //StartCoroutine(ChasePlayer());
         }
     }
 
@@ -32,7 +39,9 @@ public class EnemyAI : MonoBehaviour
         {
             chasing = false;
             rb.velocity = Vector3.zero;
-            StopCoroutine(ChasePlayer());
+            pathfinder.canMove = false;
+            pathfinder.canSearch = false;
+            //StopCoroutine(ChasePlayer());
         }
     }
 

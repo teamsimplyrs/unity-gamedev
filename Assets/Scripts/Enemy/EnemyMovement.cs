@@ -76,8 +76,8 @@ public class EnemyMovement : MonoBehaviour
 
     void EnemyAnimationLogic()
     {
-        horizontal = rb.velocity.x;
-        vertical = rb.velocity.y;
+        horizontal = pathfinder.velocity.x;
+        vertical = pathfinder.velocity.y;
 
 
         if (horizontal < 0 && Mathf.Abs(vertical) < Mathf.Abs(horizontal))
@@ -99,7 +99,7 @@ public class EnemyMovement : MonoBehaviour
 
         isWalking = !(horizontal == 00 && vertical == 0);
 
-        if (isWalking)
+        if (pathfinder.canMove)
         {
             switch (currentDir)
             {
