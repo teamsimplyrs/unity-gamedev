@@ -18,8 +18,6 @@ public class Item : MonoBehaviour
     private void Start()
     {
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
-        Debug.Log(sprite);
-        Debug.Log(InventoryItem.Name);
         sprite.sprite = InventoryItem.ItemSprite;
     }
 

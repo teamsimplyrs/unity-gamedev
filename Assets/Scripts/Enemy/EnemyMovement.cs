@@ -1,3 +1,4 @@
+using Pathfinding;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
@@ -8,6 +9,7 @@ public class EnemyMovement : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer sprite;
     Animator anim;
+    AIPath pathfinder;
 
     public string currentDir;
     private string currentState;
@@ -27,34 +29,16 @@ public class EnemyMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        pathfinder = GetComponent<AIPath>();
     }
 
     // Update is called once per frame
     void Update()
     {
         EnemyAnimationLogic();
-
-        //if (isRunning)
-        //{
-        //    anim.speed = 2;
-        //    Speed = 6;
-        //    footstep.pitch = 2;
-        //}
-        //else
-        //{
-        //    anim.speed = 1;
-        //    Speed = 3;
-        //    footstep.pitch = 1;
-        //}
-
+        //Debug.Log(pathfinder.velocity.ToString());
     }
-    //private void FixedUpdate()
-    //{
-    //    if (!ENEMYInteracting)
-    //    {
-    //        rb.velocity = new Vector2(horizontal * Speed, vertical * Speed);
-    //    }
-    //}
+
 
     void SetIdleAnimationState(string direction)
     {
@@ -95,19 +79,20 @@ public class EnemyMovement : MonoBehaviour
         horizontal = rb.velocity.x;
         vertical = rb.velocity.y;
 
-        if (horizontal < 0)
+
+        if (horizontal < 0 && Mathf.Abs(vertical) < Mathf.Abs(horizontal))
         {
             currentDir = "left";
         }
-        else if (vertical < 0)
+        else if (vertical < 0 && Mathf.Abs(vertical) > Mathf.Abs(horizontal))
         {
             currentDir = "down";
         }
-        else if (horizontal > 0)
+        else if (horizontal > 0 && Mathf.Abs(vertical) < Mathf.Abs(horizontal))
         {
             currentDir = "right";
         }
-        else if (vertical > 0)
+        else if (vertical > 0 && Mathf.Abs(vertical) >Mathf.Abs(horizontal))
         {
             currentDir = "up";
         }

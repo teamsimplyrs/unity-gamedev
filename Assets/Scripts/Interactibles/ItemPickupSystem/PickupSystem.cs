@@ -22,8 +22,5 @@ public class PickupSystem : MonoBehaviour
                 item.Qty = remainder;
             }
         }
-
-        Debug.Log("collision occurred somewhere.");
-        Debug.Log("Collision source object: " + collision.gameObject);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     public float speed = 3.0f; // Movement speed of the enemy
-    bool chasing;
+    [SerializeField] bool chasing;
     private Transform playerTransform;
     private Transform enemyTransform; // This is the main enemy (parent) transform
     Rigidbody2D rb;
@@ -30,8 +30,8 @@ public class EnemyAI : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
-            Debug.Log("player left");
             chasing = false;
+            rb.velocity = Vector3.zero;
             StopCoroutine(ChasePlayer());
         }
     }
@@ -48,9 +48,11 @@ public class EnemyAI : MonoBehaviour
             if(Vector2.Distance(enemyTransform.position, playerTransform.position) < 1f)
             {
                 chasing = false;
+                rb.velocity = Vector2.zero;
             }
             yield return null;
         }
+        yield return null;
         //}
     }
 }
