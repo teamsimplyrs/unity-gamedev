@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,8 @@ public class PlayerHealth : MonoBehaviour
         maxHealth = maxHeartAmount * healthPerHeart;
         checkHealthAmount();
     }
+
+    
 
     private void Update()
     {
@@ -82,6 +85,11 @@ public class PlayerHealth : MonoBehaviour
         curHealth -= amount;
         curHealth = Mathf.Clamp(curHealth, 0, startHearts * healthPerHeart);
         updateHearts();
+    }
+
+    public void Heal(int amount)
+    {
+        TakeDamage(-amount);
     }
 
     public void AddHeartContainer()

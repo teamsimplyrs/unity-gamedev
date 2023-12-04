@@ -5102,16 +5102,24 @@ MonoBehaviour:
   initialItems:
   - qty: 1
     item: {fileID: 11400000, guid: 739a095fc1dd73047b301ff2471cbee1, type: 2}
+    itemState: []
   - qty: 1
     item: {fileID: 0}
+    itemState: []
   - qty: 1
     item: {fileID: 0}
+    itemState: []
   - qty: 1
     item: {fileID: 0}
+    itemState: []
   - qty: 1
     item: {fileID: 0}
+    itemState: []
   - qty: 0
     item: {fileID: 0}
+    itemState: []
+  dropClip: {fileID: 0}
+  audioSource: {fileID: 2117978655975468688}
 --- !u!82 &2117978655975468688
 AudioSource:
   m_ObjectHideFlags: 0

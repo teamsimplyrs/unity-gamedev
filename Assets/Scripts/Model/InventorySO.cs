@@ -27,7 +27,7 @@ namespace Inventory.Model
             }
         }
 
-        public int AddItem(ItemSO pItem, int pQty)
+        public int AddItem(ItemSO pItem, int pQty, List<ItemParameter> itemState = null)
         {
             if (!pItem.IsStackable)
             {
@@ -35,7 +35,7 @@ namespace Inventory.Model
                 {
                     while (pQty > 0 && !IsInventoryFull())
                     {
-                        pQty -= AddItemToFirstFreeSlot(pItem, 1);
+                        pQty -= AddItemToFirstFreeSlot(pItem, 1, itemState);
                         pQty--;
                     }
                     InformAboutChange();
@@ -48,12 +48,14 @@ namespace Inventory.Model
             return pQty;
         }
 
-        private int AddItemToFirstFreeSlot(ItemSO pItem, int pQty)
+        private int AddItemToFirstFreeSlot(ItemSO pItem, int pQty, List<ItemParameter> itemState = null)
         {
             InventoryItem nonStackableItem = new InventoryItem
             {
                 item = pItem,
-                qty = pQty
+                qty = pQty,
+                itemState =
+                    new List<ItemParameter>(itemState == null ? pItem.DefaultParametersList : itemState)
             };
 
             for (int i = 0; i < inventoryItems.Count; i++)
@@ -101,6 +103,28 @@ namespace Inventory.Model
             return pQty;
         }
 
+        public void RemoveItem(int itemIndex, int amount)
+        {
+            if (inventoryItems.Count > itemIndex)
+            {
+                if (inventoryItems[itemIndex].IsEmpty)
+                {
+                    return;
+                }
+                int remainderItems = inventoryItems[itemIndex].qty - amount;
+                if (remainderItems <= 0)
+                {
+                    inventoryItems[itemIndex] = InventoryItem.GetEmptyItem();
+                }
+                else
+                {
+                    inventoryItems[itemIndex] = inventoryItems[itemIndex].ChangeQty(remainderItems);
+                }
+
+                InformAboutChange();
+            }
+        }
+
         public void AddItem(InventoryItem pItemObj)
         {
             AddItem(pItemObj.item, pItemObj.qty);
@@ -144,13 +168,15 @@ namespace Inventory.Model
     {
         public int qty;
         public ItemSO item;
+        public List<ItemParameter> itemState;
 
         public bool IsEmpty => item == null;
 
-        public InventoryItem(ItemSO pItem, int pQty)
+        public InventoryItem(ItemSO pItem, int pQty, List<ItemParameter> pItemState = null)
         {
             qty = pQty;
             item = pItem;
+            itemState = pItemState;
         }
 
         public InventoryItem ChangeQty(int newQty)
@@ -159,6 +185,7 @@ namespace Inventory.Model
             {
                 item = this.item,
                 qty = newQty,
+                itemState = new List<ItemParameter>(this.itemState)
             };
         }
 
@@ -166,7 +193,8 @@ namespace Inventory.Model
             => new InventoryItem
             {
                 item = null,
-                qty = 0
+                qty = 0,
+                itemState = new List<ItemParameter>()
             };
 
     }

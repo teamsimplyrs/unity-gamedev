@@ -11,6 +11,8 @@ namespace Inventory.UI
         [SerializeField] private RectTransform contentPanel;
         [SerializeField] private InventoryDescription itemDesc;
         [SerializeField] private MouseFollower mouseFollower;
+        [SerializeField] private ActionMenuScript actionMenu;
+        [SerializeField] private EquippedMeleeSlot equippedMeleeSlot;
 
         List<InventoryItemSlot> listItemSlots = new List<InventoryItemSlot>();
 
@@ -59,6 +61,11 @@ namespace Inventory.UI
             listItemSlots[itemIndex].Select();
         }
 
+        internal void ResetDescription()
+        {
+            itemDesc.ResetDesc();
+        }
+
         public void UpdateData(int itemIndex, Sprite sprite, int qty)
         {
             if (listItemSlots.Count > itemIndex)
@@ -69,7 +76,12 @@ namespace Inventory.UI
 
         private void HandleShowItemActions(InventoryItemSlot pSlot)
         {
-
+            int index = listItemSlots.IndexOf(pSlot);
+            if (index == -1)
+            {
+                return;
+            }
+            OnItemActionRequested?.Invoke(index);
         }
 
         private void HandleSwap(InventoryItemSlot pSlot)
@@ -137,10 +149,23 @@ namespace Inventory.UI
             {
                 itemSlot.Deselect();
             }
+            actionMenu.Toggle(false);
+        }
+
+        public void AddAction(string actionName, Action performAction)
+        {
+            actionMenu.AddButton(actionName, performAction);
+        }
+
+        public void ShowItemAction(int itemIndex)
+        {
+            actionMenu.Toggle(true);
+            actionMenu.transform.position = new Vector3(listItemSlots[itemIndex].transform.position.x, listItemSlots[itemIndex].transform.position.y - 20f, actionMenu.transform.position.z);
         }
 
         public void Hide()
         {
+            actionMenu.Toggle(false);
             gameObject.SetActive(false);
             ResetDraggedItem();
         }

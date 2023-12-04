@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3489829570128470816}
   m_HandleRect: {fileID: 7959816346429774309}
   m_Direction: 2
-  m_Value: 1.0000004
+  m_Value: 1.0000002
   m_Size: 0.24
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1936,6 +1936,7 @@ MonoBehaviour:
   contentPanel: {fileID: 9217721149054828534}
   itemDesc: {fileID: 5256794564956089338}
   mouseFollower: {fileID: 0}
+  equippedMeleeSlot: {fileID: 0}
 --- !u!1 &8253393321417754169
 GameObject:
   m_ObjectHideFlags: 0
@@ -2123,8 +2124,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 17.135025, y: -63.253334}
-  m_SizeDelta: {x: 33, y: 33}
+  m_AnchoredPosition: {x: 17.8, y: -63.253}
+  m_SizeDelta: {x: 25.6672, y: 25.6672}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9181012972277450989
 CanvasRenderer:
@@ -2147,7 +2148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.039215688}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
