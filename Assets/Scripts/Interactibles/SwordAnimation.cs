@@ -1,3 +1,4 @@
+using Inventory.Model;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,5 +41,12 @@ public class SwordAnimation : MonoBehaviour
     {
         trailRenderer.enabled = false;
         swordCollider.enabled = false;
+    }
+
+    public void UpdateEquippedSword(GameObject character)
+    {
+        PlayerWeapon playerWeapon = character.GetComponent<PlayerWeapon>();
+        EquippablesSO sword = playerWeapon.GetWeapon();
+        this.sword.GetComponent<SpriteRenderer>().sprite = sword.ItemSprite;
     }
 }

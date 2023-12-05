@@ -1,3 +1,4 @@
+using Inventory.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,9 @@ namespace Inventory.Model
         public string ActionName => "Equip";
 
         [field: SerializeField]
+        public bool HasProjectile;
+
+        [field: SerializeField]
         public AudioClip ActionSound => throw new System.NotImplementedException();
 
         public bool PerformAction(GameObject character, List<ItemParameter> itemState = null)
@@ -19,8 +23,14 @@ namespace Inventory.Model
             {
                 weaponSystem.SetWeapon(this, itemState == null ?
                     DefaultParametersList : itemState);
+                SwordAnimation swordAnim = character.GetComponentInChildren<SwordAnimation>();
+                if (swordAnim != null)
+                {
+                    swordAnim.UpdateEquippedSword(character);
+                }
                 return true;
             }
+            
             return false;
         }
     }

@@ -163,6 +163,11 @@ namespace Inventory.UI
             actionMenu.transform.position = new Vector3(listItemSlots[itemIndex].transform.position.x, listItemSlots[itemIndex].transform.position.y - 20f, actionMenu.transform.position.z);
         }
 
+        public void HideItemAction()
+        {
+            actionMenu.Toggle(false);
+        }
+
         public void Hide()
         {
             actionMenu.Toggle(false);

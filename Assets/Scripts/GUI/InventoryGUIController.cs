@@ -125,6 +125,7 @@ namespace Inventory
                 {
                     inventoryPage.ResetSelection();
                     inventoryPage.ResetDescription();
+                    inventoryPage.HideItemAction();
                 }
             }
         }
