@@ -14,6 +14,8 @@ public class PlayerAttack : MonoBehaviour
     bool attacking;
     public AnimationClip spinClip;
     public AnimationClip swingClip;
+    private PlayerWeapon weapon;
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,12 +25,13 @@ public class PlayerAttack : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         local_current_dir = movement.currentDir;
         swordAnimator = playerHandObject.GetComponent<Animator>();
+        weapon = GetComponent<PlayerWeapon>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && weapon.GetWeapon() != null)
         {
             playerHandObject.SetActive(true);
             attacking = swordAnimator.GetBool("attacking");
@@ -78,6 +81,7 @@ public class PlayerAttack : MonoBehaviour
         if(damageHander != null)
         {
             damageHander.hit(gameObject);
+            weapon.ReduceDurability(5);
         }
     }
 }

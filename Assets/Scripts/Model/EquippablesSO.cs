@@ -23,10 +23,11 @@ namespace Inventory.Model
             {
                 weaponSystem.SetWeapon(this, itemState == null ?
                     DefaultParametersList : itemState);
-                SwordAnimation swordAnim = character.GetComponentInChildren<SwordAnimation>();
+                SwordAnimation swordAnim = character.GetComponentInChildren<SwordAnimation>(true);
                 if (swordAnim != null)
                 {
                     swordAnim.UpdateEquippedSword(character);
+                    Debug.Log("sword anim is not null");
                 }
                 return true;
             }

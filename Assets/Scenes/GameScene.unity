@@ -4825,6 +4825,18 @@ PrefabInstance:
       propertyPath: initialItems.Array.data[1].item
       value: 
       objectReference: {fileID: 11400000, guid: 18afb86e894e976448c112cebb6877bd, type: 2}
+    - target: {fileID: 1531228219331527324, guid: 5acd15ee706aecf45b0e28c4b57b09be, type: 3}
+      propertyPath: initialItems.Array.data[1].itemState.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1531228219331527324, guid: 5acd15ee706aecf45b0e28c4b57b09be, type: 3}
+      propertyPath: initialItems.Array.data[1].itemState.Array.data[0].value
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1531228219331527324, guid: 5acd15ee706aecf45b0e28c4b57b09be, type: 3}
+      propertyPath: initialItems.Array.data[1].itemState.Array.data[0].itemParameter
+      value: 
+      objectReference: {fileID: 11400000, guid: 620b3fba2726ac7439d2bfa05b5e528d, type: 2}
     - target: {fileID: 2115240323913152230, guid: 5acd15ee706aecf45b0e28c4b57b09be, type: 3}
       propertyPath: healthImages.Array.data[0]
       value: 
@@ -4941,9 +4953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 0}
   inventoryData: {fileID: 11400000, guid: 224af8e809804a74bb26f79cb1ec736c, type: 2}
-  weaponParameters:
-  - itemParameter: {fileID: 11400000, guid: 620b3fba2726ac7439d2bfa05b5e528d, type: 2}
-    value: -20
+  weaponParameters: []
   weaponCurrentState: []
   equippedMeleeSlot: {fileID: 829786322}
 --- !u!1 &1224011093 stripped
@@ -18648,7 +18658,7 @@ Tilemap:
       - {fileID: 626259399, guid: 1b47a4e861cdc1a4cb34c415e5ba30c5, type: 3}
       - {fileID: 1342044326, guid: 1b47a4e861cdc1a4cb34c415e5ba30c5, type: 3}
       - {fileID: -1858397557, guid: 1b47a4e861cdc1a4cb34c415e5ba30c5, type: 3}
-      m_AnimationSpeed: 20.000002
+      m_AnimationSpeed: 20
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -5, y: 6, z: 0}
@@ -18678,7 +18688,7 @@ Tilemap:
       - {fileID: 626259399, guid: 1b47a4e861cdc1a4cb34c415e5ba30c5, type: 3}
       - {fileID: 1342044326, guid: 1b47a4e861cdc1a4cb34c415e5ba30c5, type: 3}
       - {fileID: -1858397557, guid: 1b47a4e861cdc1a4cb34c415e5ba30c5, type: 3}
-      m_AnimationSpeed: 20
+      m_AnimationSpeed: 20.000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -7, y: 7, z: 0}
@@ -22397,6 +22407,10 @@ PrefabInstance:
     - target: {fileID: 2969235710920764932, guid: 8ecf835a84ae2e446a19ff22b2d0f39c, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5463976834050719512, guid: 8ecf835a84ae2e446a19ff22b2d0f39c, type: 3}
+      propertyPath: startHearts
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5703981458650406197, guid: 8ecf835a84ae2e446a19ff22b2d0f39c, type: 3}
       propertyPath: m_AnchorMax.x

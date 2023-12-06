@@ -1,5 +1,6 @@
 using Inventory.Model;
 using Inventory.UI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,33 +26,55 @@ public class PlayerWeapon : MonoBehaviour
             inventoryData.AddItem(weapon, 1, weaponCurrentState);
         }
 
-        this.weapon = weaponSO;
-        this.weaponCurrentState = new List<ItemParameter>(itemState);
+        weapon = weaponSO;
+        weaponParameters = new List<ItemParameter>(itemState);
+        weaponCurrentState = new List<ItemParameter>(itemState);
         equippedMeleeSlot.SetData(weaponSO.ItemSprite);
-        ModifyParameters();
     }
 
     public EquippablesSO GetWeapon()
     {
-        return this.weapon;
+        return weapon;
     }
 
-    private void ModifyParameters()
+    private void ModifyParameters(string parameterName,float valueChange)
     {
-        foreach (var param in weaponParameters)
+        for(int i=0; i<weaponCurrentState.Count; i++)
         {
-            if (weaponCurrentState.Contains(param))
+            ItemParameter itemParameter = weaponCurrentState[i];
+            if (itemParameter.itemParameter.ParameterName == parameterName)
             {
-                int index = weaponCurrentState.IndexOf(param);
-                float newValue = weaponCurrentState[index].value + param.value;
-                weaponCurrentState[index] = new ItemParameter
-                {
-                    itemParameter = param.itemParameter,
-                    value = newValue
-                };
-
+                itemParameter.value = itemParameter.value + valueChange;
+                weaponCurrentState[i] = itemParameter;
             }
         }
+    }
+
+    public void ReduceDurability(float durabilityDecrease)
+    {
+        if (weapon != null)
+        {
+            ModifyParameters("Durability", -durabilityDecrease);
+        }
+        for (int i = 0; i < weaponCurrentState.Count; i++)
+        {
+            ItemParameter itemParameter = weaponCurrentState[i];
+            if (itemParameter.itemParameter.ParameterName == "Durability")
+            {
+                if (itemParameter.value <= 0)
+                {
+                    UnequipAndDestroy();
+                }
+            }
+        }
+    }
+
+    public void UnequipAndDestroy()
+    {
+        weapon = null;
+        weaponCurrentState = null;
+        weaponParameters = null;
+        equippedMeleeSlot.ResetData();
     }
 
 }

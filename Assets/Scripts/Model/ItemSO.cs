@@ -35,7 +35,7 @@ namespace Inventory.Model
     [Serializable]
     public struct ItemParameter : IEquatable<ItemParameter>
     {
-        public ItemParamterSO itemParameter;
+        public ItemParameterSO itemParameter;
         public float value;
 
         public bool Equals(ItemParameter other)
