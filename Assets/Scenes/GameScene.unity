@@ -4807,7 +4807,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1531228219331527324, guid: 5acd15ee706aecf45b0e28c4b57b09be, type: 3}
       propertyPath: initialItems.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1531228219331527324, guid: 5acd15ee706aecf45b0e28c4b57b09be, type: 3}
       propertyPath: initialItems.Array.data[0].qty
@@ -4827,7 +4827,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 18afb86e894e976448c112cebb6877bd, type: 2}
     - target: {fileID: 1531228219331527324, guid: 5acd15ee706aecf45b0e28c4b57b09be, type: 3}
       propertyPath: initialItems.Array.data[1].itemState.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1531228219331527324, guid: 5acd15ee706aecf45b0e28c4b57b09be, type: 3}
       propertyPath: initialItems.Array.data[1].itemState.Array.data[0].value
@@ -18688,7 +18688,7 @@ Tilemap:
       - {fileID: 626259399, guid: 1b47a4e861cdc1a4cb34c415e5ba30c5, type: 3}
       - {fileID: 1342044326, guid: 1b47a4e861cdc1a4cb34c415e5ba30c5, type: 3}
       - {fileID: -1858397557, guid: 1b47a4e861cdc1a4cb34c415e5ba30c5, type: 3}
-      m_AnimationSpeed: 20.000002
+      m_AnimationSpeed: 20
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -7, y: 7, z: 0}
@@ -22643,6 +22643,10 @@ PrefabInstance:
       propertyPath: mouseFollower
       value: 
       objectReference: {fileID: 1370999365}
+    - target: {fileID: 2717606425619477511, guid: 4de0ce96dc237524a9eca95a828c241b, type: 3}
+      propertyPath: equippedMeleeSlot
+      value: 
+      objectReference: {fileID: 829786322}
     - target: {fileID: 3304087454113080966, guid: 4de0ce96dc237524a9eca95a828c241b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

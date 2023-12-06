@@ -11,10 +11,10 @@ namespace Inventory.Model
         public string ActionName => "Equip";
 
         [field: SerializeField]
-        public bool HasProjectile;
+        public bool HasProjectile { get; private set; }
 
         [field: SerializeField]
-        public AudioClip ActionSound => throw new System.NotImplementedException();
+        public AudioClip ActionSound { get; private set; }
 
         public bool PerformAction(GameObject character, List<ItemParameter> itemState = null)
         {
@@ -27,11 +27,10 @@ namespace Inventory.Model
                 if (swordAnim != null)
                 {
                     swordAnim.UpdateEquippedSword(character);
-                    Debug.Log("sword anim is not null");
+                    //Debug.Log("sword anim is not null");
                 }
                 return true;
             }
-            
             return false;
         }
     }

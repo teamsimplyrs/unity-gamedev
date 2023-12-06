@@ -14,21 +14,23 @@ public class PlayerWeapon : MonoBehaviour
     private InventorySO inventoryData;
 
     [SerializeField]
-    private List<ItemParameter> weaponParameters, weaponCurrentState;
+    public List<ItemParameter> weaponParameters, weaponCurrentState;
 
     [SerializeField]
     private EquippedMeleeSlot equippedMeleeSlot;
 
     public void SetWeapon(EquippablesSO weaponSO, List<ItemParameter> itemState)
     {
-        if (weapon != null)
+        if (this.weapon != null)
         {
-            inventoryData.AddItem(weapon, 1, weaponCurrentState);
+            // Debug.Log("Printing state during swap:");
+            // Debug.Log(this.weapon);
+
+            inventoryData.AddItem(this.weapon, 1, weaponCurrentState);
         }
 
-        weapon = weaponSO;
-        weaponParameters = new List<ItemParameter>(itemState);
-        weaponCurrentState = new List<ItemParameter>(itemState);
+        this.weapon = weaponSO;
+        this.weaponCurrentState = new List<ItemParameter>(itemState);
         equippedMeleeSlot.SetData(weaponSO.ItemSprite);
     }
 
@@ -37,7 +39,7 @@ public class PlayerWeapon : MonoBehaviour
         return weapon;
     }
 
-    private void ModifyParameters(string parameterName,float valueChange)
+    private void ModifyParameters(String parameterName, float valueChange)
     {
         for(int i=0; i<weaponCurrentState.Count; i++)
         {
@@ -48,22 +50,36 @@ public class PlayerWeapon : MonoBehaviour
                 weaponCurrentState[i] = itemParameter;
             }
         }
+
+        /*foreach (var parameter in weaponParameters)
+        {
+            if (weaponCurrentState.Contains(parameter))
+            {
+                int index = weaponCurrentState.IndexOf(parameter);
+                float newValue = weaponCurrentState[index].value + parameter.value;
+                weaponCurrentState[index] = new ItemParameter
+                {
+                    itemParameter = parameter.itemParameter,
+                    value = newValue,
+                };
+            }
+        }*/
     }
 
     public void ReduceDurability(float durabilityDecrease)
     {
-        if (weapon != null)
+        if (this.weapon != null)
         {
             ModifyParameters("Durability", -durabilityDecrease);
-        }
-        for (int i = 0; i < weaponCurrentState.Count; i++)
-        {
-            ItemParameter itemParameter = weaponCurrentState[i];
-            if (itemParameter.itemParameter.ParameterName == "Durability")
+            for (int i = 0; i < weaponCurrentState.Count; i++)
             {
-                if (itemParameter.value <= 0)
+                ItemParameter itemParameter = weaponCurrentState[i];
+                if (itemParameter.itemParameter.ParameterName == "Durability")
                 {
-                    UnequipAndDestroy();
+                    if (itemParameter.value <= 0)
+                    {
+                        UnequipAndDestroy();
+                    }
                 }
             }
         }

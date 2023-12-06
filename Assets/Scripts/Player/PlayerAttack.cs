@@ -72,6 +72,16 @@ public class PlayerAttack : MonoBehaviour
                 }
             }
             playerHandObject.GetComponent<Animator>().SetTrigger("attacking");
+
+            //PrintWeaponCurrentState(weapon);
+        }
+    }
+
+    private void PrintWeaponCurrentState(PlayerWeapon pWeapon)
+    {
+        foreach (var param in pWeapon.weaponCurrentState)
+        {
+            Debug.Log(param.itemParameter.ParameterName + ": " + param.value);
         }
     }
 

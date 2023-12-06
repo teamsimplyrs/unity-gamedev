@@ -47,6 +47,7 @@ public class SwordAnimation : MonoBehaviour
     {
         PlayerWeapon playerWeapon = character.GetComponent<PlayerWeapon>();
         EquippablesSO sword = playerWeapon.GetWeapon();
-        this.sword.GetComponent<SpriteRenderer>().sprite = sword.ItemSprite;
+        SpriteRenderer swordSpriteRenderer = this.sword.GetComponent<SpriteRenderer>();
+        swordSpriteRenderer.sprite = sword.ItemSprite;
     }
 }

@@ -27,8 +27,16 @@ namespace Inventory.Model
             }
         }
 
-        public int AddItem(ItemSO pItem, int pQty, List<ItemParameter> itemState = null)
+        public int AddItem(ItemSO pItem, int pQty, List<ItemParameter> itemState)
         {
+            if (itemState != null)
+            {
+                Debug.Log("Printing state AFTER swap");
+                foreach (var state in itemState)
+                {
+                    Debug.Log(state.itemParameter.ParameterName + "---" + state.value);
+                }
+            }
             if (!pItem.IsStackable)
             {
                 for (int i = 0; i < inventoryItems.Count; i++)
@@ -36,7 +44,6 @@ namespace Inventory.Model
                     while (pQty > 0 && !IsInventoryFull())
                     {
                         pQty -= AddItemToFirstFreeSlot(pItem, 1, itemState);
-                        pQty--;
                     }
                     InformAboutChange();
                     return pQty;
@@ -48,7 +55,12 @@ namespace Inventory.Model
             return pQty;
         }
 
-        private int AddItemToFirstFreeSlot(ItemSO pItem, int pQty, List<ItemParameter> itemState = null)
+        public int AddItem(ItemSO pItem, int pQty)
+        {
+            return AddItem(pItem, pQty, null);
+        }
+
+        private int AddItemToFirstFreeSlot(ItemSO pItem, int pQty, List<ItemParameter> itemState)
         {
             InventoryItem nonStackableItem = new InventoryItem
             {
@@ -98,7 +110,7 @@ namespace Inventory.Model
             {
                 int newQty = Mathf.Clamp(pQty, 0, pItem.MaxStackSize);
                 pQty -= newQty;
-                AddItemToFirstFreeSlot(pItem, newQty); 
+                AddItemToFirstFreeSlot(pItem, newQty, null); 
             }
             return pQty;
         }
@@ -127,7 +139,7 @@ namespace Inventory.Model
 
         public void AddItem(InventoryItem pItemObj)
         {
-            AddItem(pItemObj.item, pItemObj.qty);
+            AddItem(pItemObj.item, pItemObj.qty, pItemObj.itemState);
         }
 
         public Dictionary<int, InventoryItem> GetCurrentInventoryState()
