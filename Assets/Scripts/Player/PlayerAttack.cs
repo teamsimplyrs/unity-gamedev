@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.Animations;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class PlayerAttack : MonoBehaviour
     public AnimationClip swingClip;
     private PlayerWeapon weapon;
 
+    public bool canPlayerAttack;
 
     // Start is called before the first frame update
     void Start()
@@ -26,12 +28,13 @@ public class PlayerAttack : MonoBehaviour
         local_current_dir = movement.currentDir;
         swordAnimator = playerHandObject.GetComponent<Animator>();
         weapon = GetComponent<PlayerWeapon>();
+        canPlayerAttack = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && weapon.GetWeapon() != null)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && weapon.GetWeapon() != null && canPlayerAttack)
         {
             playerHandObject.SetActive(true);
             attacking = swordAnimator.GetBool("attacking");
@@ -85,12 +88,59 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    private float calcPlayerDamage(float weaponBaseDamage, float critChance, float critMultiplier)
+    {
+        float finalDamage = weaponBaseDamage;
+        
+        if (critChance != 0)
+        {
+            int critProc;
+            while (critChance > 0)
+            {
+                critProc = Random.Range(0, 100);
+                Debug.Log("crit proc: " + critProc);
+                if (critProc <= critChance)
+                {
+                    finalDamage += (weaponBaseDamage * critMultiplier);
+                }
+                critChance -= 100;
+            }
+        }
+
+        return finalDamage;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IDamageHandler damageHander = collision.GetComponent<IDamageHandler>();
-        if(damageHander != null)
+        IDamageHandler damageHandler = collision.GetComponent<IDamageHandler>();
+        if (damageHandler != null && canPlayerAttack)
         {
-            damageHander.hit(gameObject);
+            float weaponMeleeDamage = 1;
+            float critChance = 0;
+            float critMultiplier = 0;
+
+            foreach (var param in weapon.weaponCurrentState)
+            {
+                switch (param.itemParameter.ParameterName)
+                {
+                    case "Melee Damage":
+                        weaponMeleeDamage = param.value;
+                        break;
+                    case "Critical Chance":
+                        critChance = param.value;
+                        break;
+                    case "Critical Multiplier":
+                        critMultiplier = param.value;
+                        break;
+                }
+            }
+            Debug.Log("melee dmg: " + weaponMeleeDamage);
+            Debug.Log("crit chance: " + critChance);
+            Debug.Log("crit dmg: " + critMultiplier);
+
+            float weaponFinalDamage = calcPlayerDamage(weaponMeleeDamage, critChance, critMultiplier);
+            damageHandler.hit(gameObject, weaponFinalDamage);
+            Debug.Log("Damage dealt: " + weaponFinalDamage);
             weapon.ReduceDurability(5);
         }
     }

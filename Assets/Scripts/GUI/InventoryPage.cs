@@ -13,6 +13,9 @@ namespace Inventory.UI
         [SerializeField] private MouseFollower mouseFollower;
         [SerializeField] private ActionMenuScript actionMenu;
         [SerializeField] private EquippedMeleeSlot equippedMeleeSlot;
+        [SerializeField] private GameObject Player;
+
+        private PlayerAttack playerAttack;
 
         List<InventoryItemSlot> listItemSlots = new List<InventoryItemSlot>();
 
@@ -23,6 +26,7 @@ namespace Inventory.UI
 
         private void Awake()
         {
+            playerAttack = Player.GetComponent<PlayerAttack>();
             Hide();
             itemDesc.ResetDesc();
             mouseFollower.Toggle(false);
@@ -134,6 +138,7 @@ namespace Inventory.UI
         public void Show()
         {
             gameObject.SetActive(true);
+            playerAttack.canPlayerAttack = false;
             ResetSelection();
         }
 
@@ -172,6 +177,7 @@ namespace Inventory.UI
         {
             actionMenu.Toggle(false);
             gameObject.SetActive(false);
+            playerAttack.canPlayerAttack = true;
             ResetDraggedItem();
         }
 

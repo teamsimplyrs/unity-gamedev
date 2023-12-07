@@ -22,7 +22,7 @@ public class EnemyDamageHandler : MonoBehaviour, IDamageHandler
         
     }
 
-    public void hit(GameObject hitter)
+    public void hit(GameObject hitter, float val)
     {
         Vector2 direction = transform.position - hitter.transform.position;
         float dirX = direction.x;
@@ -35,7 +35,7 @@ public class EnemyDamageHandler : MonoBehaviour, IDamageHandler
         }
         rb.velocity = direction * 5f;
         sprite.color = Color.red;
-        health.TakeDamage(1);
+        health.TakeDamage((int)val);
         Invoke("ResetSprite", 0.1f);
     }   
 

@@ -15,11 +15,19 @@ MonoBehaviour:
   <IsStackable>k__BackingField: 0
   <MaxStackSize>k__BackingField: 1
   <Name>k__BackingField: Iron Sword
-  <Description>k__BackingField: Iron Sword made of iron
+  <Description>k__BackingField: A crude metal blade prone to rusting, however strong
+    enough to deal with most basic enemies swiftly. A rookie must train to be able
+    to wield one.
   <ItemSprite>k__BackingField: {fileID: 131449278, guid: 6eb16e372762d6b4cb708c44ebfab931, type: 3}
   <ItemAnimation>k__BackingField: {fileID: 0}
   <DefaultParametersList>k__BackingField:
   - itemParameter: {fileID: 11400000, guid: 620b3fba2726ac7439d2bfa05b5e528d, type: 2}
-    value: 200
+    value: 150
+  - itemParameter: {fileID: 11400000, guid: 7a94aedd7b0aade4696edfd3a12e3769, type: 2}
+    value: 4
+  - itemParameter: {fileID: 11400000, guid: e6a8c88d49073d94f9759376e98007ff, type: 2}
+    value: 20
+  - itemParameter: {fileID: 11400000, guid: 0aa499887a71a714f99053fce4ed6504, type: 2}
+    value: 1
   <HasProjectile>k__BackingField: 0
   <ActionSound>k__BackingField: {fileID: 0}

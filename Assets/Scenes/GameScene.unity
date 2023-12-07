@@ -22636,6 +22636,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2717606425619477511, guid: 4de0ce96dc237524a9eca95a828c241b, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 117163800}
+    - target: {fileID: 2717606425619477511, guid: 4de0ce96dc237524a9eca95a828c241b, type: 3}
       propertyPath: sprite2
       value: 
       objectReference: {fileID: 607831742, guid: 6eb16e372762d6b4cb708c44ebfab931, type: 3}

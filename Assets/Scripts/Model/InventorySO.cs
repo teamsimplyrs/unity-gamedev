@@ -29,14 +29,6 @@ namespace Inventory.Model
 
         public int AddItem(ItemSO pItem, int pQty, List<ItemParameter> itemState)
         {
-            if (itemState != null)
-            {
-                Debug.Log("Printing state AFTER swap");
-                foreach (var state in itemState)
-                {
-                    Debug.Log(state.itemParameter.ParameterName + "---" + state.value);
-                }
-            }
             if (!pItem.IsStackable)
             {
                 for (int i = 0; i < inventoryItems.Count; i++)

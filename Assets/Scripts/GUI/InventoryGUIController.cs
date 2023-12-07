@@ -150,10 +150,36 @@ namespace Inventory
             sb.AppendLine();
             for (int i = 0; i < inventoryItem.itemState.Count; i++)
             {
-                sb.Append($"{inventoryItem.itemState[i].itemParameter.ParameterName}" +
-                    $": {inventoryItem.itemState[i].value} / " +
-                    $"{inventoryItem.item.DefaultParametersList[i].value}"
-                    );
+                ItemParameter param = inventoryItem.itemState[i];
+                switch (param.itemParameter.ParameterName)
+                {
+                    case "Durability":
+                        sb.AppendLine(
+                            $"{param.itemParameter.ParameterName}" +
+                            $": {param.value} / " +
+                            $"{inventoryItem.item.DefaultParametersList[i].value}"
+                        );
+                        break;
+                    case "Melee Damage":
+                        sb.AppendLine(
+                            $"{param.itemParameter.ParameterName}" +
+                            $": {param.value}"
+                        );
+                        break;
+                    case "Critical Chance":
+                        sb.AppendLine(
+                            $"{param.itemParameter.ParameterName}" +
+                            $": {param.value}%"
+                        );
+                        break;
+                    case "Critical Multiplier":
+                        sb.AppendLine(
+                            $"{param.itemParameter.ParameterName}" +
+                            $": +{param.value}x"
+                        );
+                        break;
+                }
+                
             }
 
             return sb.ToString();

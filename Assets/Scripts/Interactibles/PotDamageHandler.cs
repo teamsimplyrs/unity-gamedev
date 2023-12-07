@@ -33,7 +33,7 @@ public class PotDamageHandler : MonoBehaviour, IDamageHandler
         Destroy(gameObject);
     }
 
-    public void hit(GameObject hitter)
+    public void hit(GameObject hitter, float val) // "float val" parameter is unused in the case of in-world breakable objects
     {
         anim.SetTrigger("hit");
         sound.Play();
