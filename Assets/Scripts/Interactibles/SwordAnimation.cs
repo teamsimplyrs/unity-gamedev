@@ -47,7 +47,10 @@ public class SwordAnimation : MonoBehaviour
     {
         PlayerWeapon playerWeapon = character.GetComponent<PlayerWeapon>();
         EquippablesSO sword = playerWeapon.GetWeapon();
-        SpriteRenderer swordSpriteRenderer = this.sword.GetComponent<SpriteRenderer>();
+
+        //Same as the sword object above but can't access it because it's not set sometimes when updateequippedsword is called
+        GameObject swordGameObject = transform.GetChild(0).GetChild(0).gameObject;
+        SpriteRenderer swordSpriteRenderer = swordGameObject.GetComponent<SpriteRenderer>();
         swordSpriteRenderer.sprite = sword.ItemSprite;
     }
 }
