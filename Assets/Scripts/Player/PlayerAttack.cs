@@ -19,6 +19,11 @@ public class PlayerAttack : MonoBehaviour
     public AnimationClip swingClip;
     private PlayerWeapon weapon;
 
+    [SerializeField]
+    private Projectile projectile;
+
+    private Vector2 projectileLaunchOffset;
+
     public bool canPlayerAttack;
 
     // Start is called before the first frame update
@@ -80,6 +85,46 @@ public class PlayerAttack : MonoBehaviour
 
             //PrintWeaponCurrentState(weapon);
         }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1) && weapon.GetWeapon().HasProjectile)
+        {
+            
+            ProjectileSO playerProjectile = weapon.GetWeapon().WeaponProjectile;
+
+            projectileLaunchOffset = movement.currentDir switch
+            {
+                "up" => new Vector2(0f, 0.5f),
+                "down" => new Vector2(0f, -0.2f),
+                "left" => new Vector2(-0.5f, 0f),
+                "right" => new Vector2(0.5f, 0f),
+                _ => new Vector2(0.5f, 0f),
+            };
+
+            Quaternion projectileRotation = movement.currentDir switch
+            {
+                "up" => Quaternion.Euler(Vector3.forward * 90),
+                "down" => Quaternion.Euler(Vector3.forward * -90),
+                "left" => Quaternion.Euler(Vector3.forward * 180),
+                "right" => Quaternion.Euler(Vector3.forward),
+                _ => Quaternion.Euler(Vector3.forward),
+            };
+
+            Instantiate(projectile, projectileLaunchOffset, projectileRotation);
+
+            projectile.ProjectileObject = playerProjectile;
+            projectile.ProjectileSprite = playerProjectile.ProjectileSprite;
+            projectile.GetComponent<Rigidbody2D>().AddForce(
+                movement.currentDir switch
+                {
+                    "up" => new Vector2(0f, 1f),
+                    "down" => new Vector2(0f, -1f),
+                    "left" => new Vector2(-1f, 0f),
+                    "right" => new Vector2(1f, 0f),
+                    _ => new Vector2(1f, 0f)
+                },
+                ForceMode2D.Impulse
+                );
+        }
     }
 
     private void PrintWeaponCurrentState(PlayerWeapon pWeapon)
@@ -90,7 +135,7 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    private float calcPlayerDamage(float weaponBaseDamage, float critChance, float critMultiplier)
+    private float CalcPlayerDamage(float weaponBaseDamage, float critChance, float critMultiplier)
     {
         float finalDamage = weaponBaseDamage;
         
@@ -141,7 +186,7 @@ public class PlayerAttack : MonoBehaviour
             Debug.Log("crit dmg: " + critMultiplier);
 
 
-            float weaponFinalDamage = calcPlayerDamage(weaponMeleeDamage, critChance, critMultiplier);
+            float weaponFinalDamage = CalcPlayerDamage(weaponMeleeDamage, critChance, critMultiplier);
 
             if (collision.CompareTag("Enemy"))
             {

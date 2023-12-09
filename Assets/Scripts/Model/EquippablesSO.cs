@@ -14,6 +14,9 @@ namespace Inventory.Model
         public bool HasProjectile { get; private set; }
 
         [field: SerializeField]
+        public ProjectileSO WeaponProjectile { get; private set; }
+
+        [field: SerializeField]
         public AudioClip ActionSound { get; private set; }
 
         public bool PerformAction(GameObject character, List<ItemParameter> itemState = null)
