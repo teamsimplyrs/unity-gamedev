@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEditor.Animations;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
+using static UnityEngine.ParticleSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerAttack : MonoBehaviour
     PlayerMovement movement;
     Animator swordAnimator;
     AnimatorOverrideController overrideController;
+    public GameObject critParticle;
     string local_current_dir;
     bool attacking;
     public AnimationClip spinClip;
@@ -138,7 +140,43 @@ public class PlayerAttack : MonoBehaviour
             Debug.Log("crit chance: " + critChance);
             Debug.Log("crit dmg: " + critMultiplier);
 
+
             float weaponFinalDamage = calcPlayerDamage(weaponMeleeDamage, critChance, critMultiplier);
+
+            if (collision.CompareTag("Enemy"))
+            {
+                float critProcCount = (weaponFinalDamage - weaponMeleeDamage) / (weaponMeleeDamage * critMultiplier);
+                Debug.Log("CritToNormalRatio: " + critProcCount);
+                GameObject critParticleInstance = Instantiate(critParticle, collision.transform.position, Quaternion.identity);
+                ParticleSystem particleSystem = critParticleInstance.GetComponent<ParticleSystem>();
+                if (particleSystem != null)
+                {
+                    ParticleSystem.MainModule main = particleSystem.main;
+                    ParticleSystem.EmissionModule emission = particleSystem.emission;
+                    if (critProcCount == 1)
+                    {
+                        main.startColor = Color.yellow;
+                        main.startSpeed = main.startSpeed.constantMax + 3f;
+                        main.startSize = main.startSize.constant + 0.1f;
+                    }
+                    else if(critProcCount == 2) {
+                        main.startColor = new MinMaxGradient(new Color32(252, 144, 3, 255)); //Orange
+                        main.startSpeed = main.startSpeed.constantMax + 5f;
+                        main.startSize = main.startSize.constant + 0.2f;
+                
+                    }
+                    else if(critProcCount >= 3)
+                    {
+                        main.startColor = Color.red;
+                        main.startSpeed = main.startSpeed.constantMax + 7f;
+                        emission.rateOverTime = 100;
+                        main.startSize = main.startSize.constant + 0.3f;
+                    }
+                    particleSystem.Play();
+                }
+
+            }
+
             damageHandler.hit(gameObject, weaponFinalDamage);
             Debug.Log("Damage dealt: " + weaponFinalDamage);
             weapon.ReduceDurability(5);

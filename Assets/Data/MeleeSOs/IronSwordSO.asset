@@ -24,9 +24,9 @@ MonoBehaviour:
   - itemParameter: {fileID: 11400000, guid: 620b3fba2726ac7439d2bfa05b5e528d, type: 2}
     value: 150
   - itemParameter: {fileID: 11400000, guid: 7a94aedd7b0aade4696edfd3a12e3769, type: 2}
-    value: 4
+    value: 1
   - itemParameter: {fileID: 11400000, guid: e6a8c88d49073d94f9759376e98007ff, type: 2}
-    value: 20
+    value: 250
   - itemParameter: {fileID: 11400000, guid: 0aa499887a71a714f99053fce4ed6504, type: 2}
     value: 1
   <HasProjectile>k__BackingField: 0
