@@ -114,11 +114,11 @@ public class PlayerAttack : MonoBehaviour
                 "right" => Quaternion.Euler(Vector3.forward),
                 _ => Quaternion.Euler(Vector3.forward),
             };
+            projectile.direction = movement.currentDir;
 
             Instantiate(projectile, this.gameObject.transform.position + (Vector3)projectileLaunchOffset, projectileRotation);
 
             projectile.ProjectileObject = playerProjectile;
-            projectile.direction = movement.currentDir;
             projectile.isMoving = true;
         }
     }

@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour
     private Rigidbody2D rb;
     public Boolean isMoving;
     public string direction;
+    public float maxSpeed;
 
     private void Start()
     {
@@ -26,13 +27,16 @@ public class Projectile : MonoBehaviour
         {
             rb.AddForce(direction switch
             {
-                "up" => new Vector2(0f,5f),
-                "down" => new Vector2(0f, -5),
-                "left" => new Vector2(-5, 0f),
-                "right" => new Vector2(5, 0f),
+                "up" => new Vector2(0f,1f),
+                "down" => new Vector2(0f, -1),
+                "left" => new Vector2(-1, 0f),
+                "right" => new Vector2(1, 0f),
                 _ => new Vector2(1f, 0f)
             }, ForceMode2D.Impulse);
         }
+
+
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

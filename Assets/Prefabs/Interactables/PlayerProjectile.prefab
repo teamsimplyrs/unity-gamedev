@@ -101,6 +101,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectileObject: {fileID: 11400000, guid: 88e3612c627fe1945a01b1d8c1267808, type: 2}
   ProjectileSprite: {fileID: 21300000, guid: 10bdae71bf45301439c44104ad150b10, type: 3}
+  isMoving: 0
+  direction: 
+  maxSpeed: 10
 --- !u!61 &6776393703609425777
 BoxCollider2D:
   m_ObjectHideFlags: 0
