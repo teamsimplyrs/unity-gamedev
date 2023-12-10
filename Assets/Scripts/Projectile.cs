@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,11 +9,30 @@ public class Projectile : MonoBehaviour
     public Sprite ProjectileSprite;
     private GameObject ProjectileSource;
     private SpriteRenderer sr;
+    private Rigidbody2D rb;
+    public Boolean isMoving;
+    public string direction;
 
     private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         sr.sprite = ProjectileObject.ProjectileSprite;
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void FixedUpdate()
+    {
+        if (isMoving)
+        {
+            rb.AddForce(direction switch
+            {
+                "up" => new Vector2(0f,5f),
+                "down" => new Vector2(0f, -5),
+                "left" => new Vector2(-5, 0f),
+                "right" => new Vector2(5, 0f),
+                _ => new Vector2(1f, 0f)
+            }, ForceMode2D.Impulse);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -69,7 +89,7 @@ public class Projectile : MonoBehaviour
             int critProc;
             while (critChance > 0)
             {
-                critProc = Random.Range(0, 100);
+                critProc = UnityEngine.Random.Range(0, 100);
                 Debug.Log("crit proc: " + critProc);
                 if (critProc <= critChance)
                 {

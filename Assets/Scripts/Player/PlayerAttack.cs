@@ -118,14 +118,8 @@ public class PlayerAttack : MonoBehaviour
             Instantiate(projectile, this.gameObject.transform.position + (Vector3)projectileLaunchOffset, projectileRotation);
 
             projectile.ProjectileObject = playerProjectile;
-            projectile.GetComponent<Rigidbody2D>().velocity = projectileSpeed * movement.currentDir switch
-                {
-                    "up" => new Vector2(0f, 1f),
-                    "down" => new Vector2(0f, -1f),
-                    "left" => new Vector2(-1f, 0f),
-                    "right" => new Vector2(1f, 0f),
-                    _ => new Vector2(1f, 0f)
-                };
+            projectile.direction = movement.currentDir;
+            projectile.isMoving = true;
         }
     }
 
