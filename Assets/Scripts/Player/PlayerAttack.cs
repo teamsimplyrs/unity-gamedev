@@ -90,7 +90,13 @@ public class PlayerAttack : MonoBehaviour
         {
             
             ProjectileSO playerProjectile = weapon.GetWeapon().WeaponProjectile;
-
+            float projectileSpeed = 1f;
+            foreach (var param in playerProjectile.ProjectileParameters)
+            {
+                if (param.projectileParameter.ParameterName == "Projectile Speed")
+                    projectileSpeed = param.value;
+            }
+           
             projectileLaunchOffset = movement.currentDir switch
             {
                 "up" => new Vector2(0f, 0.5f),
@@ -109,21 +115,17 @@ public class PlayerAttack : MonoBehaviour
                 _ => Quaternion.Euler(Vector3.forward),
             };
 
-            Instantiate(projectile, projectileLaunchOffset, projectileRotation);
+            Instantiate(projectile, this.gameObject.transform.position + (Vector3)projectileLaunchOffset, projectileRotation);
 
             projectile.ProjectileObject = playerProjectile;
-            projectile.ProjectileSprite = playerProjectile.ProjectileSprite;
-            projectile.GetComponent<Rigidbody2D>().AddForce(
-                movement.currentDir switch
+            projectile.GetComponent<Rigidbody2D>().velocity = projectileSpeed * movement.currentDir switch
                 {
                     "up" => new Vector2(0f, 1f),
                     "down" => new Vector2(0f, -1f),
                     "left" => new Vector2(-1f, 0f),
                     "right" => new Vector2(1f, 0f),
                     _ => new Vector2(1f, 0f)
-                },
-                ForceMode2D.Impulse
-                );
+                };
         }
     }
 

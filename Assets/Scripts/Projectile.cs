@@ -7,13 +7,13 @@ public class Projectile : MonoBehaviour
     public ProjectileSO ProjectileObject;
     public Sprite ProjectileSprite;
     private GameObject ProjectileSource;
+    private SpriteRenderer sr;
 
-    /*public Projectile(ProjectileSO projectileInstance, GameObject source)
+    private void Start()
     {
-        this.ProjectileObject = projectileInstance;
-        this.ProjectileSprite = ProjectileObject.ProjectileSprite;
-        this.ProjectileSource = source;
-    }*/
+        sr = GetComponent<SpriteRenderer>();
+        sr.sprite = ProjectileObject.ProjectileSprite;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
