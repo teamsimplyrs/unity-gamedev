@@ -12,17 +12,26 @@ public class Projectile : MonoBehaviour
     private Rigidbody2D rb;
     public Boolean isMoving;
     public string direction;
-    public float maxSpeed;
+    public float projectileSpeed;
 
     private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         sr.sprite = ProjectileObject.ProjectileSprite;
         rb = GetComponent<Rigidbody2D>();
+
+        foreach (var param in ProjectileObject.ProjectileParameters)
+        {
+            if (param.projectileParameter.ParameterName == "Projectile Speed")
+            {
+                projectileSpeed = param.value;
+            }
+        }
     }
 
     private void FixedUpdate()
     {
+        
         if (isMoving)
         {
             rb.AddForce(direction switch
@@ -34,13 +43,13 @@ public class Projectile : MonoBehaviour
                 _ => new Vector2(1f, 0f)
             }, ForceMode2D.Impulse);
         }
-
-
-        rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, projectileSpeed);
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Projectile collides");
         if (collision.gameObject.CompareTag("Enemy"))
         {
             float projectileBaseDamage = 1;

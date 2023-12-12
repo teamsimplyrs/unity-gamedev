@@ -91,8 +91,18 @@ public class PlayerAttack : MonoBehaviour
             
             ProjectileSO playerProjectile = weapon.GetWeapon().WeaponProjectile;
             float projectileSpeed = 1f;
+            float projectileLifetime = 1f;
             foreach (var param in playerProjectile.ProjectileParameters)
             {
+                switch (param.projectileParameter.ParameterName)
+                {
+                    case "Projectile Speed":
+                        projectileSpeed = param.value;
+                        break;
+                    case "Projectile Lifetime":
+                        projectileLifetime = param.value;
+                        break;
+                }
                 if (param.projectileParameter.ParameterName == "Projectile Speed")
                     projectileSpeed = param.value;
             }
@@ -116,10 +126,13 @@ public class PlayerAttack : MonoBehaviour
             };
             projectile.direction = movement.currentDir;
 
-            Instantiate(projectile, this.gameObject.transform.position + (Vector3)projectileLaunchOffset, projectileRotation);
+            Projectile projectileInstance = Instantiate(projectile, this.gameObject.transform.position + (Vector3)projectileLaunchOffset, projectileRotation);
 
-            projectile.ProjectileObject = playerProjectile;
-            projectile.isMoving = true;
+            projectileInstance.ProjectileObject = playerProjectile;
+            projectileInstance.isMoving = true;
+
+            Destroy(projectileInstance, projectileLifetime);
+            
         }
     }
 
