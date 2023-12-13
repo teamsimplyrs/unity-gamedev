@@ -51,8 +51,6 @@ public class Projectile : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Projectile collides");
-            Debug.Log(this.ProjectileSource);
             float projectileBaseDamage = 1;
             float projectileCritChance = 0;
             float projectileCritMultiplier = 0;
