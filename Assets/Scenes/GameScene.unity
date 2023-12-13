@@ -18322,7 +18322,7 @@ Tilemap:
       - {fileID: 626259399, guid: 1b47a4e861cdc1a4cb34c415e5ba30c5, type: 3}
       - {fileID: 1342044326, guid: 1b47a4e861cdc1a4cb34c415e5ba30c5, type: 3}
       - {fileID: -1858397557, guid: 1b47a4e861cdc1a4cb34c415e5ba30c5, type: 3}
-      m_AnimationSpeed: 20
+      m_AnimationSpeed: 20.000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -5, y: 4, z: 0}
@@ -22050,7 +22050,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 739113941156168090, guid: 39de2d3e275b2b145865d2afe18f4625, type: 3}
       propertyPath: m_SortingLayer
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 739113941156168090, guid: 39de2d3e275b2b145865d2afe18f4625, type: 3}
       propertyPath: m_SortingOrder
@@ -22058,7 +22058,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 739113941156168090, guid: 39de2d3e275b2b145865d2afe18f4625, type: 3}
       propertyPath: m_SortingLayerID
-      value: 2009472329
+      value: -605262429
       objectReference: {fileID: 0}
     - target: {fileID: 1947665430666021785, guid: 39de2d3e275b2b145865d2afe18f4625, type: 3}
       propertyPath: m_RootOrder
@@ -22110,7 +22110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3713213859870395473, guid: 39de2d3e275b2b145865d2afe18f4625, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3713213859870395473, guid: 39de2d3e275b2b145865d2afe18f4625, type: 3}
       propertyPath: m_IsActive
@@ -22118,7 +22118,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3713213859870395473, guid: 39de2d3e275b2b145865d2afe18f4625, type: 3}
       propertyPath: m_TagString
-      value: InteractableObj
+      value: Projectile
       objectReference: {fileID: 0}
     - target: {fileID: 4714700841289757237, guid: 39de2d3e275b2b145865d2afe18f4625, type: 3}
       propertyPath: ProjectileObject

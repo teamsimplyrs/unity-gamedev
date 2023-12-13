@@ -41,85 +41,102 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && weapon.GetWeapon() != null && canPlayerAttack)
+        if (weapon.GetWeapon() != null && canPlayerAttack)
         {
-            playerHandObject.SetActive(true);
-            attacking = swordAnimator.GetBool("attacking");
-            if (local_current_dir != movement.currentDir && !attacking)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && weapon.GetWeapon() != null && canPlayerAttack)
             {
-                local_current_dir = movement.currentDir;
-                switch (movement.currentDir)
+                playerHandObject.SetActive(true);
+                attacking = swordAnimator.GetBool("attacking");
+                if (local_current_dir != movement.currentDir && !attacking)
                 {
-                    case "down":
-                        playerHandObject.transform.rotation = Quaternion.Euler(0, 0, 0f);
-                        break;
+                    local_current_dir = movement.currentDir;
+                    switch (movement.currentDir)
+                    {
+                        case "down":
+                            playerHandObject.transform.rotation = Quaternion.Euler(0, 0, 0f);
+                            break;
 
-                    case "up":
-                        playerHandObject.transform.rotation = Quaternion.Euler(0, 0, 180f);
-                        break;
+                        case "up":
+                            playerHandObject.transform.rotation = Quaternion.Euler(0, 0, 180f);
+                            break;
 
-                    case "right":
-                        playerHandObject.transform.rotation = Quaternion.Euler(0, 0, 90f);
-                        break;
+                        case "right":
+                            playerHandObject.transform.rotation = Quaternion.Euler(0, 0, 90f);
+                            break;
 
-                    case "left":
-                        playerHandObject.transform.rotation = Quaternion.Euler(0, 0, 270f);
-                        break;
+                        case "left":
+                            playerHandObject.transform.rotation = Quaternion.Euler(0, 0, 270f);
+                            break;
 
-                    default:
-                        playerHandObject.transform.rotation = Quaternion.Euler(0, 0, 0f);
-                        break;
+                        default:
+                            playerHandObject.transform.rotation = Quaternion.Euler(0, 0, 0f);
+                            break;
+                    }
+
+                    GameObject sword_sprite = playerHandObject.transform.GetChild(0).GetChild(0).gameObject;
+                    if (movement.currentDir == "up")
+                    {
+                        sword_sprite.transform.localPosition = new Vector3(0, -1.2f, 0);
+                    }
+                    else
+                    {
+                        sword_sprite.transform.localPosition = new Vector3(0, -0.8f, 0);
+                    }
                 }
+                playerHandObject.GetComponent<Animator>().SetTrigger("attacking");
 
-                GameObject sword_sprite = playerHandObject.transform.GetChild(0).GetChild(0).gameObject;
-                if (movement.currentDir == "up")
-                {
-                    sword_sprite.transform.localPosition = new Vector3(0, -1.2f, 0);
-                }
-                else
-                {
-                    sword_sprite.transform.localPosition = new Vector3(0, -0.8f, 0);
-                }
+                //PrintWeaponCurrentState(weapon);
             }
-            playerHandObject.GetComponent<Animator>().SetTrigger("attacking");
 
-            //PrintWeaponCurrentState(weapon);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse1) && weapon.GetWeapon().HasProjectile)
-        {
-            
-            ProjectileSO playerProjectile = weapon.GetWeapon().WeaponProjectile;
-            float projectileSpeed = 1f;
-            foreach (var param in playerProjectile.ProjectileParameters)
+            if (Input.GetKeyDown(KeyCode.Mouse1) && weapon.GetWeapon().HasProjectile)
             {
-                if (param.projectileParameter.ParameterName == "Projectile Speed")
-                    projectileSpeed = param.value;
+
+                ProjectileSO playerProjectile = weapon.GetWeapon().WeaponProjectile;
+                float projectileSpeed = 6f;
+                float projectileLifetime = 1f;
+                foreach (var param in playerProjectile.ProjectileParameters)
+                {
+                    switch (param.projectileParameter.ParameterName)
+                    {
+                        case "Projectile Speed":
+                            projectileSpeed = param.value;
+                            break;
+                        case "Projectile Lifetime":
+                            projectileLifetime = param.value;
+                            break;
+                    }
+                    if (param.projectileParameter.ParameterName == "Projectile Speed")
+                        projectileSpeed = param.value;
+                }
+
+                projectileLaunchOffset = movement.currentDir switch
+                {
+                    "up" => new Vector2(0f, 0.5f),
+                    "down" => new Vector2(0f, -0.2f),
+                    "left" => new Vector2(-0.5f, 0f),
+                    "right" => new Vector2(0.5f, 0f),
+                    _ => new Vector2(0.5f, 0f),
+                };
+
+                Quaternion projectileRotation = movement.currentDir switch
+                {
+                    "up" => Quaternion.Euler(Vector3.forward * 90),
+                    "down" => Quaternion.Euler(Vector3.forward * -90),
+                    "left" => Quaternion.Euler(Vector3.forward * 180),
+                    "right" => Quaternion.Euler(Vector3.forward),
+                    _ => Quaternion.Euler(Vector3.forward),
+                };
+                projectile.direction = movement.currentDir;
+                
+
+                Projectile projectileInstance = Instantiate(projectile, this.gameObject.transform.position + (Vector3)projectileLaunchOffset, projectileRotation);
+
+                projectileInstance.ProjectileObject = playerProjectile;
+                projectileInstance.SetProjectileSource(this.gameObject);
+                projectileInstance.isMoving = true;
+
+                Destroy(projectileInstance.gameObject, projectileLifetime);
             }
-           
-            projectileLaunchOffset = movement.currentDir switch
-            {
-                "up" => new Vector2(0f, 0.5f),
-                "down" => new Vector2(0f, -0.2f),
-                "left" => new Vector2(-0.5f, 0f),
-                "right" => new Vector2(0.5f, 0f),
-                _ => new Vector2(0.5f, 0f),
-            };
-
-            Quaternion projectileRotation = movement.currentDir switch
-            {
-                "up" => Quaternion.Euler(Vector3.forward * 90),
-                "down" => Quaternion.Euler(Vector3.forward * -90),
-                "left" => Quaternion.Euler(Vector3.forward * 180),
-                "right" => Quaternion.Euler(Vector3.forward),
-                _ => Quaternion.Euler(Vector3.forward),
-            };
-            projectile.direction = movement.currentDir;
-
-            Instantiate(projectile, this.gameObject.transform.position + (Vector3)projectileLaunchOffset, projectileRotation);
-
-            projectile.ProjectileObject = playerProjectile;
-            projectile.isMoving = true;
         }
     }
 
