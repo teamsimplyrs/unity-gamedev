@@ -21,7 +21,7 @@ namespace Inventory.Model
 
         public bool PerformAction(GameObject character, List<ItemParameter> itemState = null)
         {
-            PlayerWeapon weaponSystem = character.GetComponent<PlayerWeapon>();
+            WeaponHandler weaponSystem = character.GetComponent<WeaponHandler>();
             if (weaponSystem != null)
             {
                 weaponSystem.SetWeapon(this, itemState == null ?

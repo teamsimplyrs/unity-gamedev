@@ -45,7 +45,7 @@ public class SwordAnimation : MonoBehaviour
 
     public void UpdateEquippedSword(GameObject character)
     {
-        PlayerWeapon playerWeapon = character.GetComponent<PlayerWeapon>();
+        WeaponHandler playerWeapon = character.GetComponent<WeaponHandler>();
         EquippablesSO sword = playerWeapon.GetWeapon();
 
         //Same as the sword object above but can't access it because it's not set sometimes when updateequippedsword is called

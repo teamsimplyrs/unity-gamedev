@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     private string currentState;
     private bool isWalking;
     private bool isRunning;
+
+    //Similar to enemy's isStunned. Disables player movement
     public bool playerInteracting;
 
     private const string PLAYER_IDLE_DOWN = "player_idle_down";

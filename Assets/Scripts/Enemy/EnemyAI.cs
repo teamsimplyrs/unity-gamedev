@@ -8,7 +8,10 @@ public class EnemyAI : MonoBehaviour
     public float speed = 3.0f; 
     [SerializeField] bool chasing;
     private Transform playerTransform;
-    private Transform enemyTransform; 
+    private Transform enemyTransform;
+    private EnemyDamageHandler enemyDamageHandler;
+    private EnemyAttack enemyAttackHandler;
+    private bool insideDetectionRange;
     Rigidbody2D rb;
     AIPath pathfinder;
 
@@ -18,8 +21,34 @@ public class EnemyAI : MonoBehaviour
         enemyTransform = transform.parent;
         rb = enemyTransform.GetComponent<Rigidbody2D>();
         pathfinder = enemyTransform.GetComponent<AIPath>();
+        enemyDamageHandler = enemyTransform.GetComponent<EnemyDamageHandler>();
+        enemyAttackHandler = enemyTransform.GetComponent<EnemyAttack>();
         pathfinder.canMove = false;
         pathfinder.canSearch = false;
+    }
+
+    private void Update()
+    {
+        float distanceToPlayer = Vector2.Distance(enemyTransform.position, playerTransform.position);
+
+        if (insideDetectionRange)
+        {
+            if (distanceToPlayer < 1.5f)
+            {
+                chasing = false;
+                enemyAttackHandler.InitiateAttack();
+                pathfinder.canMove = false;
+            }
+            else
+            {
+                if (enemyDamageHandler.isStunned == false)
+                {
+                    pathfinder.canMove = true;
+                }
+            }
+        }
+
+       
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -29,6 +58,7 @@ public class EnemyAI : MonoBehaviour
             chasing = true;
             pathfinder.canMove = true;
             pathfinder.canSearch = true;
+            insideDetectionRange=true;
             //StartCoroutine(ChasePlayer());
         }
     }
@@ -41,6 +71,7 @@ public class EnemyAI : MonoBehaviour
             rb.velocity = Vector3.zero;
             pathfinder.canMove = false;
             pathfinder.canSearch = false;
+            insideDetectionRange=false;
             //StopCoroutine(ChasePlayer());
         }
     }
