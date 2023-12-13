@@ -21,3 +21,7 @@ MonoBehaviour:
     value: 10
   - projectileParameter: {fileID: 11400000, guid: 8c21ab802edfb5241a3bf114ec9c4b12, type: 2}
     value: 1.5
+  - projectileParameter: {fileID: 11400000, guid: b8ba05718c88ccf4aa87f21c9b9470ff, type: 2}
+    value: 6
+  - projectileParameter: {fileID: 11400000, guid: 86e6831f9ac7cb145acd09476d9c1cbe, type: 2}
+    value: 3

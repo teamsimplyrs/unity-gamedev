@@ -47,11 +47,12 @@ public class Projectile : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Projectile collides");
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log("Projectile collides");
+            Debug.Log(this.ProjectileSource);
             float projectileBaseDamage = 1;
             float projectileCritChance = 0;
             float projectileCritMultiplier = 0;
@@ -79,7 +80,7 @@ public class Projectile : MonoBehaviour
                     projectileBaseDamage, projectileCritChance, projectileCritMultiplier
                     )
                 );
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 

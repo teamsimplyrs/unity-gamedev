@@ -6,6 +6,7 @@ TagManager:
   tags:
   - InteractableObj
   - Enemy
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - UI
   - Objects
   - Interactables
-  - 
+  - Projectiles
   - 
   - 
   - 
@@ -51,4 +52,7 @@ TagManager:
     locked: 0
   - name: Objects
     uniqueID: 1341390901
+    locked: 0
+  - name: Projectiles
+    uniqueID: 3689704867
     locked: 0
