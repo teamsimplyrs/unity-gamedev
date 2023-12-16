@@ -10,7 +10,8 @@ public class Projectile : MonoBehaviour
     private GameObject ProjectileSource;
     private SpriteRenderer sr;
     private Rigidbody2D rb;
-    public Boolean isMoving;
+    public bool isMoving;
+    public bool shouldRotate;
     public string direction;
     public float projectileSpeed;
 
@@ -42,6 +43,11 @@ public class Projectile : MonoBehaviour
                 "right" => new Vector2(1, 0f),
                 _ => new Vector2(1f, 0f)
             }, ForceMode2D.Impulse);
+            
+            if (shouldRotate)
+            {
+                rb.rotation = (rb.rotation + 10) % 359;
+            }
         }
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, projectileSpeed);
         

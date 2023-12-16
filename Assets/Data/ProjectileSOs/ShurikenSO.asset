@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cbe28daee28d324cbce2f95ff533ee7, type: 3}
+  m_Name: ShurikenSO
+  m_EditorClassIdentifier: 
+  <ProjectileSprite>k__BackingField: {fileID: 21300000, guid: 3908af0a42993a84faa77837b934213c, type: 3}
+  <ProjectileSound>k__BackingField: {fileID: 0}
+  <ProjectileParameters>k__BackingField:
+  - projectileParameter: {fileID: 11400000, guid: 15f6acd34da1f6341b44f6defba6d7ae, type: 2}
+    value: 25
+  - projectileParameter: {fileID: 11400000, guid: 8c21ab802edfb5241a3bf114ec9c4b12, type: 2}
+    value: 1.5
+  - projectileParameter: {fileID: 11400000, guid: aecd8f50fa2de614991f6547050bfac5, type: 2}
+    value: 2
+  - projectileParameter: {fileID: 11400000, guid: b8ba05718c88ccf4aa87f21c9b9470ff, type: 2}
+    value: 12
+  - projectileParameter: {fileID: 11400000, guid: 86e6831f9ac7cb145acd09476d9c1cbe, type: 2}
+    value: 3
+  - projectileParameter: {fileID: 11400000, guid: 3f8aa36a2c480e84e9b1db9f4ec1a6a5, type: 2}
+    value: 1

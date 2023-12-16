@@ -94,6 +94,7 @@ public class PlayerAttack : MonoBehaviour
                 ProjectileSO playerProjectile = weapon.GetWeapon().WeaponProjectile;
                 float projectileSpeed = 6f;
                 float projectileLifetime = 1f;
+                bool shouldRotate = false;
                 foreach (var param in playerProjectile.ProjectileParameters)
                 {
                     switch (param.projectileParameter.ParameterName)
@@ -103,6 +104,9 @@ public class PlayerAttack : MonoBehaviour
                             break;
                         case "Projectile Lifetime":
                             projectileLifetime = param.value;
+                            break;
+                        case "Projectile Rotation":
+                            shouldRotate = (param.value == 1);
                             break;
                     }
                     if (param.projectileParameter.ParameterName == "Projectile Speed")
@@ -134,6 +138,7 @@ public class PlayerAttack : MonoBehaviour
                 projectileInstance.ProjectileObject = playerProjectile;
                 projectileInstance.SetProjectileSource(this.gameObject);
                 projectileInstance.isMoving = true;
+                projectileInstance.shouldRotate = shouldRotate;
 
                 Destroy(projectileInstance.gameObject, projectileLifetime);
             }
