@@ -19,7 +19,7 @@ public abstract class WeaponHandler : MonoBehaviour
     [SerializeField]
     protected EquippedMeleeSlot equippedMeleeSlot;
 
-    public abstract void SetWeapon(EquippablesSO weaponSO, List<ItemParameter> itemState);
+    public abstract void SetWeapon(EquippablesSO weaponSO, List<ItemParameter> itemState, List<ItemParameter> itemParameters);
 
     public EquippablesSO GetWeapon()
     {

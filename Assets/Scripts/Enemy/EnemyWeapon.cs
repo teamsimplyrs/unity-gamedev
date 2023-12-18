@@ -10,10 +10,11 @@ public class EnemyWeapon : WeaponHandler
         weapon.PerformAction(this.gameObject);
     }
 
-    public override void SetWeapon(EquippablesSO weaponSO, List<ItemParameter> itemState)
+    public override void SetWeapon(EquippablesSO weaponSO, List<ItemParameter> itemState, List<ItemParameter> itemParameters)
     {
         weapon = weaponSO;
         weaponCurrentState = new List<ItemParameter>(itemState);
+        weaponParameters = new List<ItemParameter>(itemParameters);
         //equippedMeleeSlot.SetData(weaponSO.ItemSprite);
     }
 }

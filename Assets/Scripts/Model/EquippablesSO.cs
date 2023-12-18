@@ -24,8 +24,7 @@ namespace Inventory.Model
             WeaponHandler weaponSystem = character.GetComponent<WeaponHandler>();
             if (weaponSystem != null)
             {
-                weaponSystem.SetWeapon(this, itemState == null ?
-                    DefaultParametersList : itemState);
+                weaponSystem.SetWeapon(this, itemState == null ? DefaultParametersList : itemState, DefaultParametersList);
                 SwordAnimation swordAnim = character.GetComponentInChildren<SwordAnimation>(true);
                 if (swordAnim != null)
                 {

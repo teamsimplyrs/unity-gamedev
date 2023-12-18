@@ -714,6 +714,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2613481387653141342, guid: a093eac2582b7b5458ec3cfbc5b95512, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 635438022858507610}
     - target: {fileID: 2854394676618196099, guid: a093eac2582b7b5458ec3cfbc5b95512, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -736,11 +740,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4981494885626925050, guid: a093eac2582b7b5458ec3cfbc5b95512, type: 3}
       propertyPath: m_Size
-      value: 0.24000002
+      value: 0.23962255
       objectReference: {fileID: 0}
     - target: {fileID: 4981494885626925050, guid: a093eac2582b7b5458ec3cfbc5b95512, type: 3}
       propertyPath: m_Value
-      value: -0.0000013719527
+      value: -0.000002743905
       objectReference: {fileID: 0}
     - target: {fileID: 5304281666182059332, guid: a093eac2582b7b5458ec3cfbc5b95512, type: 3}
       propertyPath: m_AnchorMax.x
@@ -760,7 +764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6392311016728486040, guid: a093eac2582b7b5458ec3cfbc5b95512, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 228.0003
+      value: 228.00061
       objectReference: {fileID: 0}
     - target: {fileID: 7060898076508404254, guid: a093eac2582b7b5458ec3cfbc5b95512, type: 3}
       propertyPath: m_AnchorMax.y

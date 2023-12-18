@@ -7,6 +7,8 @@ TagManager:
   - InteractableObj
   - Enemy
   - Projectile
+  - HoverTitle
+  - HoverStats
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - Objects
   - Interactables
   - Projectiles
-  - 
+  - UIOverlay
   - 
   - 
   - 
@@ -55,4 +57,7 @@ TagManager:
     locked: 0
   - name: Projectiles
     uniqueID: 3689704867
+    locked: 0
+  - name: UIOverlay
+    uniqueID: 620413851
     locked: 0

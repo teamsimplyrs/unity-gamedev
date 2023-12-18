@@ -1,3 +1,4 @@
+using Inventory.Model;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,12 +8,13 @@ namespace Inventory.UI
 {
     public class EquippedMeleeSlot : MonoBehaviour
     {
-        private Image img;
+        private InventoryItem equippedItem;
+        private Image spriteImg;
         private bool empty;
 
         private void Start()
         {
-            img = GetComponent<Image>();
+            spriteImg = this.GetComponent<Image>();
             empty = true;
             ResetData();
         }
@@ -28,11 +30,17 @@ namespace Inventory.UI
             empty = true;
         }
 
-        public void SetData(Sprite equippingItemSprite)
+        public void SetData(EquippablesSO pEquippedItem)
         {
-            this.img.sprite = equippingItemSprite;
+            this.equippedItem.item = pEquippedItem;
+            this.spriteImg.sprite = pEquippedItem.ItemSprite;
             gameObject.SetActive(true);
             this.empty = false;
+        }
+
+        public InventoryItem GetData()
+        {
+            return equippedItem;
         }
     }
 }
