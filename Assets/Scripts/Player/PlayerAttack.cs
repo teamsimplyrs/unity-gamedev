@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEditor;
-using UnityEditor.Animations;
+/*using UnityEditor;
+using UnityEditor.Animations;*/
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
 using static UnityEngine.ParticleSystem;
